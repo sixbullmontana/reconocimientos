@@ -828,6 +828,15 @@
       "date": "2026-09-01",
       "file": "data/images/mvyxkpqobyqwju.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyxl6q7s8qhnm",
+      "name": "Ruta de Fundamentos de Habilidades Profesionales",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-09-03",
+      "file": "data/images/mvyxl6q7s8qhnm.webp",
+      "type": "image/webp"
     }
   ]
 }
