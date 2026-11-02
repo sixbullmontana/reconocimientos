@@ -1845,6 +1845,15 @@
       "date": "2022-04-15",
       "file": "data/images/mvz312k3o2kx2h.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz32l6emsiixu",
+      "name": "Diplomado en Educación Financiera",
+      "category": "Diplomas",
+      "institution": "Secretaría de Hacienda y Crédito Público",
+      "date": "2020-08-01",
+      "file": "data/images/mvz32l6emsiixu.webp",
+      "type": "image/webp"
     }
   ]
 }
