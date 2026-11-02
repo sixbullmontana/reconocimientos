@@ -26,6 +26,8 @@
   button.danger { background: transparent; color: var(--err); border: 1px solid var(--line); }
   button.danger:hover { background: var(--card); }
   button.small { padding: 6px 10px; font-size: 13px; }
+  button.link { background: none; color: var(--accent); padding: 4px 0; font-weight: 500; font-size: 13px; }
+  button.link:hover { background: none; text-decoration: underline; }
   button:disabled { opacity: .45; cursor: not-allowed; }
 
   .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; }
@@ -63,6 +65,12 @@
   label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
   .field { margin-bottom: 12px; }
   .field input, .field select { width: 100%; }
+  .errmsg { color: var(--err); font-size: 13px; margin-bottom: 4px; }
+  code { background: var(--bg); padding: 1px 5px; border-radius: 5px; font-size: 12px; }
+  details { font-size: 13px; color: var(--muted); margin: 6px 0 12px; }
+  details summary { cursor: pointer; color: var(--accent); font-weight: 500; }
+  details ol { padding-left: 20px; margin: 8px 0 0; line-height: 1.55; }
+  body:not(.is-admin) .admin-only { display: none !important; }
 
   .drop { border: 2px dashed var(--line); border-radius: 14px; padding: 26px 14px; text-align: center; color: var(--muted); cursor: pointer; transition: .15s; }
   .drop.over, .drop:hover { border-color: var(--accent); background: var(--soft); color: var(--text); }
@@ -72,7 +80,6 @@
   .urow { display: grid; grid-template-columns: 56px 1fr 1fr; gap: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 10px; align-items: center; }
   .urow img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; background: var(--bg); }
   .urow .x { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
-  .urow .rm { justify-self: end; }
   .urow .top { grid-column: 2 / 4; display: flex; gap: 8px; }
   .urow .top input { flex: 1; }
 
@@ -87,11 +94,8 @@
   .vinfo p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
   .vclose { position: absolute; top: 10px; right: 10px; z-index: 2; background: rgba(0,0,0,.45); width: 36px; height: 36px; padding: 0; border-radius: 50%; }
   .vclose:hover { background: rgba(0,0,0,.65); }
-  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 99; }
+  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 99; max-width: 92vw; text-align: center; }
   .toast.show { opacity: 1; }
-  body:not(.is-admin) .admin-only { display: none !important; }
-  .errmsg { color: var(--err); font-size: 13px; margin-bottom: 4px; }
-  code { background: var(--bg); padding: 1px 5px; border-radius: 5px; font-size: 12px; }
   @media (max-width: 520px) { .urow { grid-template-columns: 56px 1fr; } .urow .top { grid-column: 2; } }
 </style>
 </head>
@@ -100,13 +104,13 @@
   <header>
     <div>
       <h1>Reconocimientos</h1>
-      <p class="sub" id="summary">Tu colección de diplomas, certificados y más.</p>
+      <p class="sub" id="summary">Cargando colección…</p>
     </div>
     <div class="actions">
       <button id="btnAdd" class="admin-only">+ Agregar imágenes</button>
       <button class="ghost admin-only" id="btnBackup">Respaldar</button>
       <button class="ghost admin-only" id="btnRestore">Restaurar</button>
-      <button class="ghost admin-only" id="btnKey">Cambiar clave</button>
+      <button class="ghost" id="btnRefresh" title="Volver a cargar la colección">↻</button>
       <button class="ghost" id="btnLogin">🔒 Acceso admin</button>
       <input type="file" id="restoreInput" accept=".zip" hidden>
     </div>
@@ -134,7 +138,7 @@
     <h2>Agregar imágenes</h2>
     <div class="drop" id="drop">
       <strong>Arrastra tus imágenes aquí o haz clic para elegirlas</strong>
-      Funciona con WebP (y también PNG o JPG)
+      Funciona con WebP (y también PNG o JPG). Se guardan en la nube para que todos las vean.
     </div>
     <input type="file" id="fileInput" accept="image/*" multiple hidden>
 
@@ -192,33 +196,39 @@
 </dialog>
 
 <!-- Acceso admin -->
-<dialog id="dlgLogin" style="width:min(380px,94vw)">
+<dialog id="dlgLogin" style="width:min(460px,94vw)">
   <form class="dlg" id="loginForm" autocomplete="off">
     <h2>Acceso de administrador</h2>
-    <p class="sub" style="margin-bottom:14px">Escribe la palabra clave para poder agregar, editar o respaldar.</p>
-    <div class="field"><label for="loginPass">Palabra clave</label><input id="loginPass" type="password" autocomplete="off"></div>
-    <div class="errmsg" id="loginErr" hidden>Palabra clave incorrecta</div>
+
+    <div id="loginSaved" hidden>
+      <p class="sub" style="margin-bottom:14px">Escribe tu palabra clave para entrar.</p>
+      <div class="field"><label for="loginPass">Palabra clave</label><input id="loginPass" type="password" autocomplete="off"></div>
+      <button type="button" class="link" id="useOther">Usar otro token u olvidar el guardado</button>
+    </div>
+
+    <div id="loginNew">
+      <p class="sub" style="margin-bottom:10px">Pega el token de GitHub de tu repositorio. Con él las imágenes se guardan en la nube.</p>
+      <details>
+        <summary>¿Cómo obtengo el token?</summary>
+        <ol>
+          <li>En GitHub: tu foto → <b>Settings</b> → al final <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</li>
+          <li>Ponle un nombre (ej. Reconocimientos) y la expiración que prefieras.</li>
+          <li><b>Repository access</b> → <b>Only select repositories</b> → elige el repositorio de esta página.</li>
+          <li><b>Permissions</b> → <b>Repository permissions</b> → <b>Contents</b> → <b>Read and write</b>.</li>
+          <li>Pulsa <b>Generate token</b> y copia el código (empieza con <code>github_pat_</code>).</li>
+        </ol>
+      </details>
+      <div class="field"><label for="loginRepo">Repositorio (usuario/nombre)</label><input id="loginRepo" placeholder="mi-usuario/reconocimientos"></div>
+      <div class="field"><label for="loginToken">Token de GitHub</label><input id="loginToken" type="password" autocomplete="off" placeholder="github_pat_…"></div>
+      <div class="field"><label for="loginNewPass">Palabra clave para recordarlo en este equipo (opcional)</label><input id="loginNewPass" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres"></div>
+    </div>
+
+    <div class="errmsg" id="loginErr" hidden></div>
     <div class="foot">
       <button type="button" class="ghost" id="loginCancel">Cancelar</button>
-      <button type="submit">Entrar</button>
+      <button type="submit" id="loginGo">Entrar</button>
     </div>
   </form>
-</dialog>
-
-<!-- Cambiar clave -->
-<dialog id="dlgKey" style="width:min(520px,94vw)">
-  <div class="dlg">
-    <h2>Cambiar palabra clave</h2>
-    <p class="sub" style="margin-bottom:14px">Escribe la nueva clave y se generará un código. Pégalo en el archivo <b>index.html</b> (en GitHub) para reemplazar el valor de <b>ADMIN_HASH</b>.</p>
-    <div class="field"><label for="newPass">Nueva palabra clave</label><input id="newPass" type="text" autocomplete="off" placeholder="Mínimo 8 caracteres"></div>
-    <button id="genHash" class="ghost">Generar código</button>
-    <div id="hashOut" hidden style="margin-top:14px">
-      <label>Tu nuevo código (cópialo completo)</label>
-      <input id="hashVal" readonly style="width:100%;font-family:monospace;font-size:12px">
-      <p class="sub" style="margin:10px 0 0;font-size:13px">En GitHub abre <b>index.html</b>, pulsa el lápiz ✏️, busca la línea <code>const ADMIN_HASH = '…'</code>, reemplaza lo que va entre comillas por este código y guarda con <b>Commit changes</b>. La clave nueva funciona en cuanto se actualice la página.</p>
-    </div>
-    <div class="foot"><button class="ghost" id="keyClose">Cerrar</button></div>
-  </div>
 </dialog>
 
 <div class="toast" id="toast"></div>
@@ -227,106 +237,243 @@
 <script>
 const CATS = ['Diplomas', 'Certificados', 'Constancias', 'Reconocimientos', 'Otros'];
 const NONE = '__none__';
-// Código (hash) de la palabra clave de administrador. Clave inicial: cambiame123
-// Para cambiarla usa el botón "Cambiar clave" dentro del modo admin y pega aquí el nuevo código.
-const ADMIN_HASH = '30fd958c75de61da65e81796a9f278774d6488be0d75f0c223d5eab01f5184ff';
-let isAdmin = false;
+const INDEX = 'data/index.json';
 const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-let db, items = [];
+let items = [];                       // [{id,name,category,institution,date,file}]
 let state = { cat: 'Todos', inst: '', q: '', sort: 'date-desc' };
 let visible = [], viewIndex = -1;
-const urls = new Map();
+let isAdmin = false, busy = false;
+const gh = { token: '', owner: '', repo: '', branch: 'main' };
+const blobUrls = new Map();           // imágenes recién subidas (se ven al instante)
 
-/* ---------- Base de datos (IndexedDB) ---------- */
-function openDB() {
-  return new Promise((res, rej) => {
-    const r = indexedDB.open('reconocimientos-db', 1);
-    r.onupgradeneeded = () => r.result.createObjectStore('items', { keyPath: 'id' });
-    r.onsuccess = () => res(r.result);
-    r.onerror = () => rej(r.error);
-  });
-}
-const store = mode => db.transaction('items', mode).objectStore('items');
-const reqP = r => new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
-const dbAll = () => reqP(store('readonly').getAll());
-const dbPut = it => reqP(store('readwrite').put(it));
-const dbDel = id => reqP(store('readwrite').delete(id));
-
-const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2));
-function urlOf(it) {
-  if (!urls.has(it.id)) urls.set(it.id, URL.createObjectURL(it.blob));
-  return urls.get(it.id);
-}
-function freeUrl(id) { if (urls.has(id)) { URL.revokeObjectURL(urls.get(id)); urls.delete(id); } }
-
-function toast(msg) {
+/* ---------- Utilidades ---------- */
+function toast(msg, ms = 2400) {
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
-  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2400);
+  clearTimeout(toast.t);
+  if (ms) toast.t = setTimeout(() => t.classList.remove('show'), ms);
 }
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const cleanId = s => String(s || '').replace(/[^\w-]/g, '');
+function extOf(type) { return type === 'image/webp' ? '.webp' : type === 'image/png' ? '.png' : type === 'image/jpeg' ? '.jpg' : type === 'image/gif' ? '.gif' : '.img'; }
+const imgPath = (id, type) => 'data/images/' + id + extOf(type);
 function fmtDate(d) {
   if (!d) return 'Sin fecha';
   const [y, m, dd] = d.split('-').map(Number);
   return new Date(y, m - 1, dd).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 const instLabel = it => it.institution || 'Sin institución';
+const blobToB64 = b => new Promise((res, rej) => { const f = new FileReader(); f.onload = () => res(String(f.result).split(',')[1]); f.onerror = rej; f.readAsDataURL(b); });
+function utf8ToB64(s) { let bin = ''; new TextEncoder().encode(s).forEach(b => bin += String.fromCharCode(b)); return btoa(bin); }
+function b64ToUtf8(b) { return new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g, '')), c => c.charCodeAt(0))); }
+
+function detectRepo() {
+  const h = location.hostname;
+  if (!h.endsWith('.github.io')) return '';
+  const owner = h.split('.')[0];
+  const seg = location.pathname.split('/').filter(Boolean)[0];
+  const repo = (!seg || seg.endsWith('.html')) ? owner + '.github.io' : seg;
+  return owner + '/' + repo;
+}
+function rawUrl(it) {
+  const r = (gh.owner ? gh.owner + '/' + gh.repo : (localStorage.getItem('rec-repo') || detectRepo()));
+  return `https://raw.githubusercontent.com/${r}/${gh.branch || 'main'}/${it.file}`;
+}
+const srcOf = it => blobUrls.get(it.id) || it.file;
+function withFallback(img, it) {
+  img.onerror = () => { if (!img.dataset.fb) { img.dataset.fb = '1'; img.src = rawUrl(it); } };
+  img.src = srcOf(it);
+}
+async function fetchBlob(it) {
+  for (const u of [srcOf(it), rawUrl(it)]) {
+    try { const r = await fetch(u); if (r.ok) return await r.blob(); } catch (e) {}
+  }
+  throw new Error('No se pudo obtener la imagen “' + it.name + '”');
+}
+
+/* ---------- GitHub API ---------- */
+function ghFetch(path, opts = {}) {
+  return fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}${path}`, {
+    cache: 'no-store',
+    ...opts,
+    headers: {
+      'Accept': 'application/vnd.github+json',
+      'Authorization': 'Bearer ' + gh.token,
+      'X-GitHub-Api-Version': '2022-11-28',
+      ...(opts.body ? { 'Content-Type': 'application/json' } : {})
+    }
+  });
+}
+async function httpError(r) {
+  let detail = '';
+  try { detail = (await r.json()).message || ''; } catch (e) {}
+  if (r.status === 401) return new Error('Token inválido o vencido');
+  if (r.status === 403 || r.status === 429) return new Error('GitHub rechazó la acción: revisa que el token tenga Contents → Read and write, o espera un momento (límite de uso). ' + detail);
+  if (r.status === 404) return new Error('No se encontró el repositorio o el token no tiene acceso a él');
+  return new Error('Error de GitHub (' + r.status + '). ' + detail);
+}
+async function readIndex() {
+  const r = await ghFetch(`/contents/${INDEX}?ref=${encodeURIComponent(gh.branch)}&t=${Date.now()}`);
+  if (r.status === 404) return { list: [], sha: null };
+  if (!r.ok) throw await httpError(r);
+  const j = await r.json();
+  let data = {};
+  try { data = JSON.parse(b64ToUtf8(j.content)); } catch (e) {}
+  return { list: Array.isArray(data.items) ? data.items : [], sha: j.sha };
+}
+async function mutateIndex(fn, message) {
+  for (let n = 0; n < 3; n++) {
+    const { list, sha } = await readIndex();
+    const next = fn(list);
+    const body = { message, content: utf8ToB64(JSON.stringify({ version: 1, items: next }, null, 2)), branch: gh.branch };
+    if (sha) body.sha = sha;
+    const r = await ghFetch('/contents/' + INDEX, { method: 'PUT', body: JSON.stringify(body) });
+    if (r.ok) return next;
+    if (r.status === 409 || r.status === 422) { await sleep(800); continue; }
+    throw await httpError(r);
+  }
+  throw new Error('No se pudo guardar la lista, intenta de nuevo');
+}
+async function putFile(path, blob, message) {
+  const content = await blobToB64(blob);
+  for (let n = 0; n < 3; n++) {
+    const r = await ghFetch('/contents/' + path, { method: 'PUT', body: JSON.stringify({ message, content, branch: gh.branch }) });
+    if (r.ok) return;
+    const ra = parseInt(r.headers.get('retry-after') || '0', 10);
+    if ((r.status === 403 || r.status === 429) && ra) { await sleep(ra * 1000); continue; }
+    if (r.status === 409 || r.status >= 500) { await sleep(1000); continue; }
+    throw await httpError(r);
+  }
+  throw new Error('No se pudo subir el archivo');
+}
+async function deleteFile(path, message) {
+  const g = await ghFetch(`/contents/${path}?ref=${encodeURIComponent(gh.branch)}&t=${Date.now()}`);
+  if (g.status === 404) return;
+  if (!g.ok) throw await httpError(g);
+  const { sha } = await g.json();
+  const r = await ghFetch('/contents/' + path, { method: 'DELETE', body: JSON.stringify({ message, sha, branch: gh.branch }) });
+  if (!r.ok && r.status !== 404) throw await httpError(r);
+}
+
+/* ---------- Cifrado del token (opcional, en este equipo) ---------- */
+const b64 = u8 => btoa(String.fromCharCode(...u8));
+const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function deriveKey(pass, salt) {
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function encryptToken(token, pass) {
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(pass, salt);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(token)));
+  return { s: b64(salt), i: b64(iv), d: b64(ct) };
+}
+async function decryptToken(o, pass) {
+  const key = await deriveKey(pass, unb64(o.s));
+  return new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(o.i) }, key, unb64(o.d)));
+}
 
 /* ---------- Acceso de administrador ---------- */
-async function sha(s) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('rec:' + s));
-  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
-}
+let useNew = true;
 function setAdmin(v) {
   isAdmin = v;
   document.body.classList.toggle('is-admin', v);
   $('btnLogin').textContent = v ? 'Cerrar sesión admin' : '🔒 Acceso admin';
-  if (!v) ['dlgAdd', 'dlgEdit', 'dlgKey'].forEach(id => { if ($(id).open) $(id).close(); });
+  if (!v) { gh.token = ''; ['dlgAdd', 'dlgEdit'].forEach(id => { if ($(id).open) $(id).close(); }); }
+}
+function loginUI() {
+  $('loginSaved').hidden = useNew;
+  $('loginNew').hidden = !useNew;
+  $('loginErr').hidden = true;
 }
 $('btnLogin').onclick = () => {
-  if (isAdmin) { setAdmin(false); toast('Sesión de administrador cerrada'); return; }
-  $('loginPass').value = ''; $('loginErr').hidden = true;
+  if (isAdmin) { setAdmin(false); loadItems(); toast('Sesión de administrador cerrada'); return; }
+  useNew = !localStorage.getItem('rec-token');
+  $('loginPass').value = ''; $('loginToken').value = ''; $('loginNewPass').value = '';
+  $('loginRepo').value = localStorage.getItem('rec-repo') || detectRepo();
+  loginUI();
   $('dlgLogin').showModal();
-  $('loginPass').focus();
+  (useNew ? $('loginRepo').value ? $('loginToken') : $('loginRepo') : $('loginPass')).focus();
 };
+$('useOther').onclick = () => { localStorage.removeItem('rec-token'); useNew = true; loginUI(); $('loginToken').focus(); };
 $('loginCancel').onclick = () => $('dlgLogin').close();
+function loginError(msg) { $('loginErr').textContent = msg; $('loginErr').hidden = false; }
 $('loginForm').onsubmit = async e => {
   e.preventDefault();
-  let ok = false;
-  try { ok = (await sha($('loginPass').value)) === ADMIN_HASH; } catch (err) { toast('Tu navegador no permite verificar la clave'); return; }
-  if (ok) { $('dlgLogin').close(); setAdmin(true); toast('Modo administrador activado'); }
-  else { await new Promise(r => setTimeout(r, 700)); $('loginErr').hidden = false; $('loginPass').select(); }
+  $('loginErr').hidden = true;
+  $('loginGo').disabled = true;
+  try {
+    let token, repoStr, newPass = '';
+    if (!useNew) {
+      repoStr = localStorage.getItem('rec-repo') || detectRepo();
+      try { token = await decryptToken(JSON.parse(localStorage.getItem('rec-token')), $('loginPass').value); }
+      catch (err) { await sleep(600); loginError('Palabra clave incorrecta'); return; }
+    } else {
+      token = $('loginToken').value.trim();
+      repoStr = $('loginRepo').value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '');
+      newPass = $('loginNewPass').value;
+      if (!/^[\w.-]+\/[\w.-]+$/.test(repoStr)) { loginError('Escribe el repositorio como usuario/nombre'); return; }
+      if (!token) { loginError('Pega tu token de GitHub'); return; }
+      if (newPass && newPass.length < 6) { loginError('La palabra clave debe tener al menos 6 caracteres'); return; }
+    }
+    const [owner, repo] = repoStr.split('/');
+    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + token } });
+    if (!r.ok) { loginError((await httpError(r)).message); return; }
+    const info = await r.json();
+    Object.assign(gh, { token, owner, repo, branch: info.default_branch || 'main' });
+    localStorage.setItem('rec-repo', repoStr);
+    if (useNew && newPass) localStorage.setItem('rec-token', JSON.stringify(await encryptToken(token, newPass)));
+    $('dlgLogin').close();
+    setAdmin(true);
+    toast('Modo administrador activado');
+    loadItems();
+  } catch (err) {
+    loginError('No se pudo conectar con GitHub. Revisa tu conexión.');
+  } finally {
+    $('loginGo').disabled = false;
+  }
 };
-$('btnKey').onclick = () => {
-  if (!isAdmin) return;
-  $('newPass').value = ''; $('hashOut').hidden = true;
-  $('dlgKey').showModal();
-};
-$('keyClose').onclick = () => $('dlgKey').close();
-$('genHash').onclick = async () => {
-  const v = $('newPass').value;
-  if (v.length < 8) { toast('Usa al menos 8 caracteres'); return; }
-  $('hashVal').value = await sha(v);
-  $('hashOut').hidden = false;
-  $('hashVal').select();
-};
+
+/* ---------- Cargar la colección ---------- */
+function normalize(list) {
+  return list.filter(i => i && typeof i.file === 'string' && i.file.startsWith('data/images/') && !i.file.includes('..'))
+    .map(i => ({
+      id: cleanId(i.id) || uid(), name: String(i.name || 'Sin nombre'),
+      category: CATS.includes(i.category) ? i.category : 'Otros',
+      institution: String(i.institution || ''), date: String(i.date || ''), file: i.file, type: i.type || ''
+    }));
+}
+async function loadItems() {
+  $('summary').textContent = 'Cargando colección…';
+  try {
+    if (isAdmin) items = normalize((await readIndex()).list);
+    else {
+      const r = await fetch(INDEX + '?t=' + Date.now(), { cache: 'no-store' });
+      items = r.ok ? normalize((await r.json()).items || []) : [];
+    }
+  } catch (err) {
+    items = [];
+    toast(err.message || 'No se pudo cargar la colección');
+  }
+  render();
+}
+$('btnRefresh').onclick = loadItems;
 
 /* ---------- Render principal ---------- */
 function render() {
-  // Pestañas
   const counts = { Todos: items.length };
   CATS.forEach(c => counts[c] = items.filter(i => i.category === c).length);
   $('tabs').innerHTML = '';
   ['Todos', ...CATS].forEach(c => {
     const b = document.createElement('button');
     b.className = 'tab' + (state.cat === c ? ' on' : '');
-    b.innerHTML = '';
     b.append(c);
     const s = document.createElement('span'); s.textContent = counts[c]; b.append(s);
     b.onclick = () => { state.cat = c; state.inst = ''; render(); };
     $('tabs').appendChild(b);
   });
 
-  // Filtro de instituciones (según la sección activa)
   const inCat = items.filter(i => state.cat === 'Todos' || i.category === state.cat);
   const names = [...new Set(inCat.filter(i => i.institution).map(i => i.institution))].sort((a, b) => a.localeCompare(b, 'es'));
   const hasNone = inCat.some(i => !i.institution);
@@ -339,12 +486,10 @@ function render() {
   if (hasNone) sel.add(new Option('Sin institución', NONE));
   sel.value = state.inst;
 
-  // Datalist de autocompletar
   const all = [...new Set(items.map(i => i.institution).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
   $('instList').innerHTML = '';
   all.forEach(n => { const o = document.createElement('option'); o.value = n; $('instList').appendChild(o); });
 
-  // Filtrar y ordenar
   const q = state.q.trim().toLowerCase();
   visible = inCat.filter(i => {
     if (state.inst === NONE && i.institution) return false;
@@ -361,14 +506,13 @@ function render() {
     return state.sort === 'date-asc' ? da.localeCompare(db_) : db_.localeCompare(da);
   });
 
-  // Tarjetas
   const grid = $('grid');
   grid.innerHTML = '';
   visible.forEach((it, idx) => {
     const card = document.createElement('div');
     card.className = 'item';
     card.innerHTML = '<div class="thumb"><img loading="lazy" alt=""></div><div class="meta"><div class="t"></div><div class="i"></div><div class="row"><span class="badge"></span><span class="date"></span></div></div>';
-    card.querySelector('img').src = urlOf(it);
+    withFallback(card.querySelector('img'), it);
     card.querySelector('.t').textContent = it.name;
     card.querySelector('.t').title = it.name;
     card.querySelector('.i').textContent = instLabel(it);
@@ -384,16 +528,15 @@ function render() {
     empty.innerHTML = '';
     const s = document.createElement('strong');
     const p = document.createElement('span');
-    if (!items.length) { s.textContent = 'Aún no tienes imágenes'; p.textContent = 'Pulsa “Agregar imágenes” para subir tus primeros documentos.'; }
+    if (!items.length) { s.textContent = 'Aún no hay imágenes'; p.textContent = 'El administrador puede agregar las primeras desde “Acceso admin”.'; }
     else { s.textContent = 'Sin resultados'; p.textContent = 'Prueba con otra sección, institución o búsqueda.'; }
     empty.append(s, p);
   } else empty.hidden = true;
 
   $('summary').textContent = items.length
-    ? `${items.length} documento${items.length === 1 ? '' : 's'} guardado${items.length === 1 ? '' : 's'} · mostrando ${visible.length}`
-    : 'Tu colección de diplomas, certificados y más.';
+    ? `${items.length} documento${items.length === 1 ? '' : 's'} · mostrando ${visible.length}`
+    : 'Colección de diplomas, certificados y más.';
 }
-
 $('q').oninput = e => { state.q = e.target.value; render(); };
 $('inst').onchange = e => { state.inst = e.target.value; render(); };
 $('sort').onchange = e => { state.sort = e.target.value; render(); };
@@ -407,8 +550,10 @@ function openView(idx) {
 function showView() {
   const it = visible[viewIndex];
   if (!it) return;
-  $('vImg').src = urlOf(it);
-  $('vImg').alt = it.name;
+  const img = $('vImg');
+  delete img.dataset.fb;
+  withFallback(img, it);
+  img.alt = it.name;
   $('vTitle').textContent = it.name;
   $('vSub').textContent = `${it.category} · ${instLabel(it)} · ${fmtDate(it.date)}`;
   $('vPrev').style.display = $('vNext').style.display = visible.length > 1 ? '' : 'none';
@@ -417,24 +562,33 @@ const step = d => { if (!visible.length) return; viewIndex = (viewIndex + d + vi
 $('vPrev').onclick = () => step(-1);
 $('vNext').onclick = () => step(1);
 $('vClose').onclick = () => $('dlgView').close();
-$('vOpen').onclick = () => window.open(urlOf(visible[viewIndex]), '_blank');
-$('vDown').onclick = () => {
+$('vOpen').onclick = () => window.open($('vImg').currentSrc || $('vImg').src, '_blank');
+$('vDown').onclick = async () => {
   const it = visible[viewIndex];
-  const a = document.createElement('a');
-  a.href = urlOf(it);
-  a.download = it.name.replace(/\.[^.]+$/, '') + extOf(it.blob.type);
-  a.click();
+  try {
+    const blob = await fetchBlob(it);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = it.name.replace(/[\\/:*?"<>|]/g, '_') + extOf(blob.type);
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  } catch (err) { toast(err.message); }
 };
 $('vDel').onclick = async () => {
-  if (!isAdmin) return;
+  if (!isAdmin || busy) return;
   const it = visible[viewIndex];
-  if (!confirm(`¿Eliminar “${it.name}”? Esta acción no se puede deshacer.`)) return;
-  await dbDel(it.id);
-  freeUrl(it.id);
-  items = items.filter(i => i.id !== it.id);
-  $('dlgView').close();
-  render();
-  toast('Eliminado');
+  if (!confirm(`¿Eliminar “${it.name}” de la nube? Esta acción no se puede deshacer.`)) return;
+  busy = true; toast('Eliminando…', 0);
+  try {
+    await mutateIndex(list => list.filter(i => i.id !== it.id), 'Eliminar: ' + it.name);
+    await deleteFile(it.file, 'Eliminar imagen: ' + it.name).catch(() => {});
+    if (blobUrls.has(it.id)) { URL.revokeObjectURL(blobUrls.get(it.id)); blobUrls.delete(it.id); }
+    items = items.filter(i => i.id !== it.id);
+    $('dlgView').close();
+    render();
+    toast('Eliminado');
+  } catch (err) { toast(err.message, 5000); }
+  busy = false;
 };
 $('vEdit').onclick = () => { if (isAdmin) openEdit(visible[viewIndex]); };
 document.addEventListener('keydown', e => {
@@ -442,9 +596,10 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(1);
 });
-['dlgView', 'dlgAdd', 'dlgEdit', 'dlgLogin', 'dlgKey'].forEach(id => {
-  $(id).addEventListener('click', e => { if (e.target === $(id)) $(id).close(); });
+['dlgView', 'dlgAdd', 'dlgEdit', 'dlgLogin'].forEach(id => {
+  $(id).addEventListener('click', e => { if (e.target === $(id) && !(busy && id === 'dlgAdd')) $(id).close(); });
 });
+$('dlgAdd').addEventListener('cancel', e => { if (busy) e.preventDefault(); });
 
 /* ---------- Editar ---------- */
 let editing = null;
@@ -460,17 +615,22 @@ function openEdit(it) {
 }
 $('editCancel').onclick = () => $('dlgEdit').close();
 $('editSave').onclick = async () => {
-  if (!isAdmin) return;
+  if (!isAdmin || busy) return;
   const name = $('eName').value.trim();
   if (!name) { $('eName').focus(); return; }
-  Object.assign(editing, { name, category: $('eCat').value, institution: $('eInst').value.trim(), date: $('eDate').value });
-  await dbPut(editing);
-  $('dlgEdit').close();
+  const upd = { name, category: $('eCat').value, institution: $('eInst').value.trim(), date: $('eDate').value };
   const id = editing.id;
-  render();
-  const idx = visible.findIndex(i => i.id === id);
-  if (idx >= 0) { viewIndex = idx; showView(); } else $('dlgView').close();
-  toast('Cambios guardados');
+  busy = true; $('editSave').disabled = true; toast('Guardando en la nube…', 0);
+  try {
+    await mutateIndex(list => list.map(i => i.id === id ? { ...i, ...upd } : i), 'Editar: ' + name);
+    Object.assign(editing, upd);
+    $('dlgEdit').close();
+    render();
+    const idx = visible.findIndex(i => i.id === id);
+    if (idx >= 0) { viewIndex = idx; showView(); } else $('dlgView').close();
+    toast('Cambios guardados');
+  } catch (err) { toast(err.message, 5000); }
+  busy = false; $('editSave').disabled = false;
 };
 
 /* ---------- Agregar ---------- */
@@ -481,6 +641,7 @@ function resetAdd() {
   $('rows').innerHTML = '';
   $('bulkBox').hidden = true;
   $('addSave').disabled = true;
+  $('addSave').textContent = 'Guardar';
   $('bInst').value = ''; $('bDate').value = '';
 }
 $('btnAdd').onclick = () => {
@@ -489,22 +650,22 @@ $('btnAdd').onclick = () => {
   $('bCat').value = CATS.includes(state.cat) ? state.cat : 'Diplomas';
   $('dlgAdd').showModal();
 };
-$('addCancel').onclick = () => $('dlgAdd').close();
-$('dlgAdd').addEventListener('close', resetAdd);
+$('addCancel').onclick = () => { if (!busy) $('dlgAdd').close(); };
+$('dlgAdd').addEventListener('close', () => { if (!busy) resetAdd(); });
 $('drop').onclick = () => $('fileInput').click();
 $('fileInput').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
 ['dragenter', 'dragover'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.add('over'); }));
 ['dragleave', 'drop'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.remove('over'); }));
 $('drop').addEventListener('drop', e => addFiles([...e.dataTransfer.files]));
 
+const MAX_BYTES = 25 * 1024 * 1024;
 function addFiles(files) {
-  const imgs = files.filter(f => f.type.startsWith('image/'));
-  if (imgs.length < files.length) toast('Se omitieron archivos que no son imágenes');
-  imgs.forEach(f => pending.push({
-    file: f, url: URL.createObjectURL(f),
-    name: f.name.replace(/\.[^.]+$/, ''),
-    category: $('bCat').value, institution: '', date: ''
-  }));
+  let skipped = 0;
+  files.forEach(f => {
+    if (!f.type.startsWith('image/') || f.size > MAX_BYTES) { skipped++; return; }
+    pending.push({ file: f, url: URL.createObjectURL(f), name: f.name.replace(/\.[^.]+$/, ''), category: $('bCat').value, institution: '', date: '' });
+  });
+  if (skipped) toast(`${skipped} archivo${skipped === 1 ? '' : 's'} omitido${skipped === 1 ? '' : 's'} (no es imagen o pesa más de 25 MB)`, 4000);
   renderRows();
 }
 function renderRows() {
@@ -512,7 +673,7 @@ function renderRows() {
   rows.innerHTML = '';
   $('bulkBox').hidden = !pending.length;
   $('addSave').disabled = !pending.length;
-  $('addSave').textContent = pending.length ? `Guardar ${pending.length}` : 'Guardar';
+  $('addSave').textContent = pending.length ? `Guardar ${pending.length} en la nube` : 'Guardar';
   pending.forEach((p, i) => {
     const r = document.createElement('div');
     r.className = 'urow';
@@ -520,7 +681,7 @@ function renderRows() {
     const top = document.createElement('div'); top.className = 'top';
     const nm = document.createElement('input'); nm.value = p.name; nm.placeholder = 'Nombre del archivo';
     nm.oninput = () => p.name = nm.value;
-    const rm = document.createElement('button'); rm.className = 'danger small rm'; rm.textContent = 'Quitar';
+    const rm = document.createElement('button'); rm.className = 'danger small'; rm.textContent = 'Quitar';
     rm.onclick = () => { URL.revokeObjectURL(p.url); pending.splice(i, 1); renderRows(); };
     top.append(nm, rm);
     const x = document.createElement('div'); x.className = 'x';
@@ -541,72 +702,116 @@ $('bApply').onclick = () => {
   renderRows();
 };
 $('addSave').onclick = async () => {
-  if (!isAdmin) return;
-  const bad = pending.find(p => !p.name.trim());
-  if (bad) { toast('Todos los archivos necesitan un nombre'); return; }
-  $('addSave').disabled = true;
-  const n = pending.length;
-  for (const p of pending) {
-    const it = { id: uid(), name: p.name.trim(), category: p.category, institution: p.institution.trim(), date: p.date, blob: p.file, added: Date.now() };
-    await dbPut(it);
-    items.push(it);
+  if (!isAdmin || busy) return;
+  if (pending.some(p => !p.name.trim())) { toast('Todos los archivos necesitan un nombre'); return; }
+  const batch = [...pending];
+  busy = true;
+  $('addSave').disabled = true; $('addCancel').disabled = true;
+  const done = [];
+  let failure = null;
+  for (let k = 0; k < batch.length; k++) {
+    const p = batch[k];
+    $('addSave').textContent = `Subiendo ${k + 1} de ${batch.length}…`;
+    const id = uid();
+    const path = imgPath(id, p.file.type);
+    try {
+      await putFile(path, p.file, 'Agregar imagen: ' + p.name.trim());
+      done.push({ id, name: p.name.trim(), category: p.category, institution: p.institution.trim(), date: p.date, file: path, type: p.file.type });
+      blobUrls.set(id, URL.createObjectURL(p.file));
+      if (k < batch.length - 1) await sleep(500);
+    } catch (err) { failure = err; break; }
   }
-  $('dlgAdd').close();
-  render();
-  toast(`${n} imagen${n === 1 ? '' : 'es'} guardada${n === 1 ? '' : 's'}`);
+  try {
+    if (done.length) {
+      $('addSave').textContent = 'Guardando lista…';
+      await mutateIndex(list => [...list, ...done], `Agregar ${done.length} imagen${done.length === 1 ? '' : 'es'}`);
+      items.push(...normalize(done));
+    }
+  } catch (err) { failure = failure || err; }
+  busy = false;
+  $('addCancel').disabled = false;
+  if (done.length && !failure) {
+    $('dlgAdd').close(); resetAdd(); render();
+    toast(`${done.length} imagen${done.length === 1 ? '' : 'es'} guardada${done.length === 1 ? '' : 's'} en la nube. Los demás las verán en 1–2 minutos.`, 5000);
+  } else {
+    if (done.length) { pending = pending.slice(done.length); renderRows(); render(); }
+    $('addSave').disabled = !pending.length;
+    $('addSave').textContent = pending.length ? `Guardar ${pending.length} en la nube` : 'Guardar';
+    toast((failure ? failure.message : 'No se pudo guardar') + (done.length ? ` (${done.length} sí se guardaron)` : ''), 6000);
+  }
 };
 
 /* ---------- Respaldo ---------- */
-function extOf(type) { return type === 'image/webp' ? '.webp' : type === 'image/png' ? '.png' : type === 'image/jpeg' ? '.jpg' : '.img'; }
 $('btnBackup').onclick = async () => {
-  if (!isAdmin) return;
+  if (!isAdmin || busy) return;
   if (!items.length) { toast('No hay nada que respaldar'); return; }
-  const zip = new JSZip();
-  const meta = items.map(i => ({ id: i.id, name: i.name, category: i.category, institution: i.institution, date: i.date, type: i.blob.type, file: 'imagenes/' + i.id + extOf(i.blob.type) }));
-  zip.file('datos.json', JSON.stringify(meta, null, 2));
-  meta.forEach((m, k) => zip.file(m.file, items[k].blob));
-  toast('Preparando respaldo…');
-  const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'reconocimientos-respaldo-' + new Date().toISOString().slice(0, 10) + '.zip';
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  busy = true;
+  try {
+    const zip = new JSZip();
+    const meta = items.map(i => ({ id: i.id, name: i.name, category: i.category, institution: i.institution, date: i.date, type: i.type || '', file: 'imagenes/' + i.id + (i.file.match(/\.[a-z]+$/i) || ['.webp'])[0] }));
+    for (let k = 0; k < items.length; k++) {
+      toast(`Preparando respaldo… ${k + 1} de ${items.length}`, 0);
+      const blob = await fetchBlob(items[k]);
+      meta[k].type = blob.type || meta[k].type;
+      zip.file(meta[k].file, blob);
+    }
+    zip.file('datos.json', JSON.stringify(meta, null, 2));
+    const out = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(out);
+    a.download = 'reconocimientos-respaldo-' + new Date().toISOString().slice(0, 10) + '.zip';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    toast('Respaldo descargado');
+  } catch (err) { toast(err.message, 5000); }
+  busy = false;
 };
-$('btnRestore').onclick = () => { if (isAdmin) $('restoreInput').click(); };
+$('btnRestore').onclick = () => { if (isAdmin && !busy) $('restoreInput').click(); };
 $('restoreInput').onchange = async e => {
   const f = e.target.files[0]; e.target.value = '';
-  if (!f || !isAdmin) return;
+  if (!f || !isAdmin || busy) return;
+  busy = true;
+  const added = [];
+  let failure = null;
   try {
     const zip = await JSZip.loadAsync(f);
-    const meta = JSON.parse(await zip.file('datos.json').async('string'));
-    let added = 0;
-    for (const m of meta) {
-      if (items.some(i => i.id === m.id)) continue;
+    const mf = zip.file('datos.json');
+    if (!mf) throw new Error('El ZIP no es un respaldo válido');
+    const meta = JSON.parse(await mf.async('string'));
+    const existing = new Set(items.map(i => i.id));
+    const todo = meta.filter(m => { const id = cleanId(m.id); return !(id && existing.has(id)); });
+    if (!todo.length) { toast('No había nada nuevo que restaurar'); busy = false; return; }
+    for (let k = 0; k < todo.length; k++) {
+      const m = todo[k];
+      toast(`Subiendo a la nube… ${k + 1} de ${todo.length}`, 0);
       const entry = zip.file(m.file);
       if (!entry) continue;
       const blob = new Blob([await entry.async('arraybuffer')], { type: m.type || 'image/webp' });
-      const it = { id: m.id, name: m.name, category: CATS.includes(m.category) ? m.category : 'Otros', institution: m.institution || '', date: m.date || '', blob, added: Date.now() };
-      await dbPut(it); items.push(it); added++;
+      if (blob.size > MAX_BYTES) continue;
+      const id = cleanId(m.id) || uid();
+      const path = imgPath(id, blob.type);
+      try {
+        await putFile(path, blob, 'Restaurar imagen: ' + (m.name || id));
+        added.push({ id, name: String(m.name || 'Sin nombre'), category: m.category, institution: m.institution || '', date: m.date || '', file: path, type: blob.type });
+        blobUrls.set(id, URL.createObjectURL(blob));
+        await sleep(500);
+      } catch (err) { failure = err; break; }
     }
-    render();
-    toast(added ? `${added} restaurada${added === 1 ? '' : 's'}` : 'No había nada nuevo que restaurar');
-  } catch (err) {
-    toast('No se pudo leer ese respaldo');
-  }
+  } catch (err) { failure = failure || err; }
+  try {
+    if (added.length) {
+      await mutateIndex(list => [...list, ...added.filter(a => !list.some(x => x.id === a.id))], `Restaurar ${added.length} imágenes`);
+      items.push(...normalize(added));
+      render();
+    }
+  } catch (err) { failure = failure || err; }
+  busy = false;
+  if (failure) toast(failure.message + (added.length ? ` (${added.length} sí se restauraron)` : ''), 6000);
+  else toast(`${added.length} restaurada${added.length === 1 ? '' : 's'}. Los demás las verán en 1–2 minutos.`, 5000);
 };
 
 /* ---------- Inicio ---------- */
-(async () => {
-  try {
-    db = await openDB();
-    items = await dbAll();
-    if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
-  } catch (err) {
-    toast('Tu navegador no permite guardar datos locales');
-  }
-  render();
-})();
+loadItems();
 </script>
 </body>
 </html>
