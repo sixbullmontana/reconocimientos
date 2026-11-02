@@ -1746,6 +1746,15 @@
       "date": "2020-08-23",
       "file": "data/images/mvz2rklsug7896.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz2s9cg271d2r",
+      "name": "Diplomado Técnico en Cómputo en la Nube",
+      "category": "Diplomas",
+      "institution": "Capacitate Para El Empleo - Diploma",
+      "date": "2022-03-22",
+      "file": "data/images/mvz2s9cg271d2r.webp",
+      "type": "image/webp"
     }
   ]
 }
