@@ -1314,6 +1314,123 @@
       "date": "2026-09-02",
       "file": "data/images/mvyyjw76mm03ih.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyys6sxxp270h",
+      "name": "Desarrollo de Software con Agentes de AI",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-02",
+      "file": "data/images/mvyys6sxxp270h.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyys8vsm8c7if",
+      "name": "Curso de Ética en IA",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-07",
+      "file": "data/images/mvyys8vsm8c7if.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysaibg9pret",
+      "name": "Ingeniería de Aplicaciones con LLMs y Agentes",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-02",
+      "file": "data/images/mvyysaibg9pret.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyyscr8q70nui",
+      "name": "Curso de Certificación ISO 27001 para Empresas",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-21",
+      "file": "data/images/mvyyscr8q70nui.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysep5hi7rud",
+      "name": "Curso de Automatizaciones Básicas con Make",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-10",
+      "file": "data/images/mvyysep5hi7rud.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysgmio6xe5h",
+      "name": "Curso de OpenClaw",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-03",
+      "file": "data/images/mvyysgmio6xe5h.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysiv5d45jlj",
+      "name": "Google Cloud Platform (GCP)",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-02",
+      "file": "data/images/mvyysiv5d45jlj.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyyskks903o3g",
+      "name": "Curso de Psicología del Consumidor",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-03",
+      "file": "data/images/mvyyskks903o3g.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysmbn73or4q",
+      "name": "Seguridad Defensiva y Cumplimiento (Blue Team)",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-01",
+      "file": "data/images/mvyysmbn73or4q.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysnyh6vwgjl",
+      "name": "Curso de Spec Driven Development",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-10",
+      "file": "data/images/mvyysnyh6vwgjl.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysprtfwez7v",
+      "name": "Curso de Preparación para el Examen TOEFL",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-10",
+      "file": "data/images/mvyysprtfwez7v.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyysrjx42bqui",
+      "name": "Curso de Creación de Páginas Web con V0",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-10",
+      "file": "data/images/mvyysrjx42bqui.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyyst7n5wpsow",
+      "name": "Curso de Vibe Coding para Crear Apps sin Programar",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-07",
+      "file": "data/images/mvyyst7n5wpsow.webp",
+      "type": "image/webp"
     }
   ]
 }
