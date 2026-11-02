@@ -1107,6 +1107,15 @@
       "date": "2026-09-02",
       "file": "data/images/mvyy3ex8zgq9rj.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyy3wak00ezg0",
+      "name": "Programación con JavaScript",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-09-03",
+      "file": "data/images/mvyy3wak00ezg0.webp",
+      "type": "image/webp"
     }
   ]
 }
