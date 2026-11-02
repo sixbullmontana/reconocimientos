@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reconocimientos</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --text: #1d1d1f; --muted: #6e6e73;
+    --line: #e4e4e0; --accent: #2f6df6; --accent-dark: #1f56d1; --soft: #eef2fe; --err: #d93a3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151516; --card: #1f1f21; --text: #f2f2f3; --muted: #9a9aa0; --line: #313135; --accent: #5b8dff; --accent-dark: #7aa2ff; --soft: #232a3d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 36px 16px 60px; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.5px; }
+  .sub { color: var(--muted); margin: 0; font-size: 14px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button { font: inherit; font-weight: 600; font-size: 14px; border: 0; border-radius: 10px; padding: 10px 16px; cursor: pointer; background: var(--accent); color: #fff; transition: .15s; }
+  button:hover { background: var(--accent-dark); }
+  button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  button.ghost:hover { background: var(--card); }
+  button.danger { background: transparent; color: var(--err); border: 1px solid var(--line); }
+  button.danger:hover { background: var(--card); }
+  button.small { padding: 6px 10px; font-size: 13px; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; }
+  .tab { white-space: nowrap; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 99px; padding: 8px 14px; font-weight: 500; }
+  .tab:hover { background: var(--soft); }
+  .tab.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab span { opacity: .65; margin-left: 6px; font-weight: 400; }
+
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+  input, select { font: inherit; font-size: 14px; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); min-width: 0; }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .filters input { flex: 1 1 200px; }
+  .filters select { flex: 0 1 220px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: .15s; display: flex; flex-direction: column; }
+  .item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .thumb { aspect-ratio: 4/3; background: var(--bg); display: flex; align-items: center; justify-content: center; }
+  .thumb img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .meta { padding: 12px 14px 14px; }
+  .meta .t { font-weight: 600; font-size: 15px; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .meta .i { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .meta .row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+  .badge { font-size: 11px; font-weight: 600; background: var(--soft); color: var(--accent); border-radius: 99px; padding: 3px 9px; }
+  .date { font-size: 12px; color: var(--muted); }
+
+  .empty { text-align: center; color: var(--muted); padding: 70px 16px; border: 2px dashed var(--line); border-radius: 16px; }
+  .empty strong { display: block; color: var(--text); font-size: 17px; margin-bottom: 6px; }
+
+  dialog { border: 1px solid var(--line); border-radius: 18px; background: var(--card); color: var(--text); padding: 0; width: min(720px, 94vw); max-height: 92vh; }
+  dialog::backdrop { background: rgba(0,0,0,.55); }
+  .dlg { padding: 22px; }
+  .dlg h2 { margin: 0 0 14px; font-size: 20px; }
+  .foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+  label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .field { margin-bottom: 12px; }
+  .field input, .field select { width: 100%; }
+
+  .drop { border: 2px dashed var(--line); border-radius: 14px; padding: 26px 14px; text-align: center; color: var(--muted); cursor: pointer; transition: .15s; }
+  .drop.over, .drop:hover { border-color: var(--accent); background: var(--soft); color: var(--text); }
+  .drop strong { display: block; color: var(--text); margin-bottom: 3px; }
+  .bulk { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; align-items: end; background: var(--bg); border-radius: 12px; padding: 12px; margin-top: 14px; }
+  .rows { margin-top: 12px; max-height: 38vh; overflow: auto; display: grid; gap: 10px; }
+  .urow { display: grid; grid-template-columns: 56px 1fr 1fr; gap: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 10px; align-items: center; }
+  .urow img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; background: var(--bg); }
+  .urow .x { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .urow .rm { justify-self: end; }
+  .urow .top { grid-column: 2 / 4; display: flex; gap: 8px; }
+  .urow .top input { flex: 1; }
+
+  dialog.view { width: min(1000px, 96vw); }
+  .vimg { background: var(--bg); display: flex; align-items: center; justify-content: center; min-height: 40vh; max-height: 66vh; position: relative; }
+  .vimg img { max-width: 100%; max-height: 66vh; object-fit: contain; display: block; }
+  .nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.45); color: #fff; width: 40px; height: 40px; padding: 0; border-radius: 50%; font-size: 20px; }
+  .nav:hover { background: rgba(0,0,0,.65); }
+  .nav.l { left: 10px; } .nav.r { right: 10px; }
+  .vinfo { padding: 16px 22px 20px; }
+  .vinfo h2 { margin: 0 0 4px; font-size: 20px; }
+  .vinfo p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+  .vclose { position: absolute; top: 10px; right: 10px; z-index: 2; background: rgba(0,0,0,.45); width: 36px; height: 36px; padding: 0; border-radius: 50%; }
+  .vclose:hover { background: rgba(0,0,0,.65); }
+  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 99; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 520px) { .urow { grid-template-columns: 56px 1fr; } .urow .top { grid-column: 2; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Reconocimientos</h1>
+      <p class="sub" id="summary">Tu colección de diplomas, certificados y más.</p>
+    </div>
+    <div class="actions">
+      <button id="btnAdd">+ Agregar imágenes</button>
+      <button class="ghost" id="btnBackup">Respaldar</button>
+      <button class="ghost" id="btnRestore">Restaurar</button>
+      <input type="file" id="restoreInput" accept=".zip" hidden>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="filters">
+    <input id="q" type="search" placeholder="Buscar por nombre o institución…">
+    <select id="inst"></select>
+    <select id="sort">
+      <option value="date-desc">Más recientes primero</option>
+      <option value="date-asc">Más antiguos primero</option>
+      <option value="name">Nombre (A–Z)</option>
+    </select>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden></div>
+</div>
+
+<!-- Agregar -->
+<dialog id="dlgAdd">
+  <div class="dlg">
+    <h2>Agregar imágenes</h2>
+    <div class="drop" id="drop">
+      <strong>Arrastra tus imágenes aquí o haz clic para elegirlas</strong>
+      Funciona con WebP (y también PNG o JPG)
+    </div>
+    <input type="file" id="fileInput" accept="image/*" multiple hidden>
+
+    <div id="bulkBox" hidden>
+      <div class="bulk">
+        <div><label>Categoría para todas</label><select id="bCat"></select></div>
+        <div><label>Institución para todas</label><input id="bInst" list="instList" placeholder="Ej. UNAM"></div>
+        <div><label>Fecha para todas</label><input id="bDate" type="date"></div>
+        <button class="ghost" id="bApply">Aplicar a todas</button>
+      </div>
+      <div class="rows" id="rows"></div>
+    </div>
+    <datalist id="instList"></datalist>
+
+    <div class="foot">
+      <button class="ghost" id="addCancel">Cancelar</button>
+      <button id="addSave" disabled>Guardar</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Editar -->
+<dialog id="dlgEdit" style="width:min(460px,94vw)">
+  <div class="dlg">
+    <h2>Editar datos</h2>
+    <div class="field"><label>Nombre del archivo</label><input id="eName"></div>
+    <div class="field"><label>Categoría</label><select id="eCat"></select></div>
+    <div class="field"><label>Institución</label><input id="eInst" list="instList"></div>
+    <div class="field"><label>Fecha</label><input id="eDate" type="date"></div>
+    <div class="foot">
+      <button class="ghost" id="editCancel">Cancelar</button>
+      <button id="editSave">Guardar cambios</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Visor -->
+<dialog id="dlgView" class="view">
+  <div class="vimg">
+    <button class="vclose" id="vClose" aria-label="Cerrar">✕</button>
+    <button class="nav l" id="vPrev" aria-label="Anterior">‹</button>
+    <img id="vImg" alt="">
+    <button class="nav r" id="vNext" aria-label="Siguiente">›</button>
+  </div>
+  <div class="vinfo">
+    <h2 id="vTitle"></h2>
+    <p id="vSub"></p>
+    <div class="actions">
+      <button class="ghost small" id="vOpen">Abrir en pestaña nueva</button>
+      <button class="ghost small" id="vDown">Descargar</button>
+      <button class="ghost small" id="vEdit">Editar</button>
+      <button class="danger small" id="vDel">Eliminar</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const CATS = ['Diplomas', 'Certificados', 'Constancias', 'Reconocimientos', 'Otros'];
+const NONE = '__none__';
+const $ = id => document.getElementById(id);
+
+let db, items = [];
+let state = { cat: 'Todos', inst: '', q: '', sort: 'date-desc' };
+let visible = [], viewIndex = -1;
+const urls = new Map();
+
+/* ---------- Base de datos (IndexedDB) ---------- */
+function openDB() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('reconocimientos-db', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('items', { keyPath: 'id' });
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+const store = mode => db.transaction('items', mode).objectStore('items');
+const reqP = r => new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+const dbAll = () => reqP(store('readonly').getAll());
+const dbPut = it => reqP(store('readwrite').put(it));
+const dbDel = id => reqP(store('readwrite').delete(id));
+
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2));
+function urlOf(it) {
+  if (!urls.has(it.id)) urls.set(it.id, URL.createObjectURL(it.blob));
+  return urls.get(it.id);
+}
+function freeUrl(id) { if (urls.has(id)) { URL.revokeObjectURL(urls.get(id)); urls.delete(id); } }
+
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2400);
+}
+function fmtDate(d) {
+  if (!d) return 'Sin fecha';
+  const [y, m, dd] = d.split('-').map(Number);
+  return new Date(y, m - 1, dd).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+const instLabel = it => it.institution || 'Sin institución';
+
+/* ---------- Render principal ---------- */
+function render() {
+  // Pestañas
+  const counts = { Todos: items.length };
+  CATS.forEach(c => counts[c] = items.filter(i => i.category === c).length);
+  $('tabs').innerHTML = '';
+  ['Todos', ...CATS].forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'tab' + (state.cat === c ? ' on' : '');
+    b.innerHTML = '';
+    b.append(c);
+    const s = document.createElement('span'); s.textContent = counts[c]; b.append(s);
+    b.onclick = () => { state.cat = c; state.inst = ''; render(); };
+    $('tabs').appendChild(b);
+  });
+
+  // Filtro de instituciones (según la sección activa)
+  const inCat = items.filter(i => state.cat === 'Todos' || i.category === state.cat);
+  const names = [...new Set(inCat.filter(i => i.institution).map(i => i.institution))].sort((a, b) => a.localeCompare(b, 'es'));
+  const hasNone = inCat.some(i => !i.institution);
+  if (state.inst && state.inst !== NONE && !names.includes(state.inst)) state.inst = '';
+  if (state.inst === NONE && !hasNone) state.inst = '';
+  const sel = $('inst');
+  sel.innerHTML = '';
+  sel.add(new Option('Todas las instituciones', ''));
+  names.forEach(n => sel.add(new Option(n, n)));
+  if (hasNone) sel.add(new Option('Sin institución', NONE));
+  sel.value = state.inst;
+
+  // Datalist de autocompletar
+  const all = [...new Set(items.map(i => i.institution).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
+  $('instList').innerHTML = '';
+  all.forEach(n => { const o = document.createElement('option'); o.value = n; $('instList').appendChild(o); });
+
+  // Filtrar y ordenar
+  const q = state.q.trim().toLowerCase();
+  visible = inCat.filter(i => {
+    if (state.inst === NONE && i.institution) return false;
+    if (state.inst && state.inst !== NONE && i.institution !== state.inst) return false;
+    if (q && !(i.name + ' ' + i.institution).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  visible.sort((a, b) => {
+    if (state.sort === 'name') return a.name.localeCompare(b.name, 'es');
+    const da = a.date || '', db_ = b.date || '';
+    if (!da && !db_) return a.name.localeCompare(b.name, 'es');
+    if (!da) return 1;
+    if (!db_) return -1;
+    return state.sort === 'date-asc' ? da.localeCompare(db_) : db_.localeCompare(da);
+  });
+
+  // Tarjetas
+  const grid = $('grid');
+  grid.innerHTML = '';
+  visible.forEach((it, idx) => {
+    const card = document.createElement('div');
+    card.className = 'item';
+    card.innerHTML = '<div class="thumb"><img loading="lazy" alt=""></div><div class="meta"><div class="t"></div><div class="i"></div><div class="row"><span class="badge"></span><span class="date"></span></div></div>';
+    card.querySelector('img').src = urlOf(it);
+    card.querySelector('.t').textContent = it.name;
+    card.querySelector('.t').title = it.name;
+    card.querySelector('.i').textContent = instLabel(it);
+    card.querySelector('.badge').textContent = it.category;
+    card.querySelector('.date').textContent = fmtDate(it.date);
+    card.onclick = () => openView(idx);
+    grid.appendChild(card);
+  });
+
+  const empty = $('empty');
+  if (!visible.length) {
+    empty.hidden = false;
+    empty.innerHTML = '';
+    const s = document.createElement('strong');
+    const p = document.createElement('span');
+    if (!items.length) { s.textContent = 'Aún no tienes imágenes'; p.textContent = 'Pulsa “Agregar imágenes” para subir tus primeros documentos.'; }
+    else { s.textContent = 'Sin resultados'; p.textContent = 'Prueba con otra sección, institución o búsqueda.'; }
+    empty.append(s, p);
+  } else empty.hidden = true;
+
+  $('summary').textContent = items.length
+    ? `${items.length} documento${items.length === 1 ? '' : 's'} guardado${items.length === 1 ? '' : 's'} · mostrando ${visible.length}`
+    : 'Tu colección de diplomas, certificados y más.';
+}
+
+$('q').oninput = e => { state.q = e.target.value; render(); };
+$('inst').onchange = e => { state.inst = e.target.value; render(); };
+$('sort').onchange = e => { state.sort = e.target.value; render(); };
+
+/* ---------- Visor ---------- */
+function openView(idx) {
+  viewIndex = idx;
+  showView();
+  if (!$('dlgView').open) $('dlgView').showModal();
+}
+function showView() {
+  const it = visible[viewIndex];
+  if (!it) return;
+  $('vImg').src = urlOf(it);
+  $('vImg').alt = it.name;
+  $('vTitle').textContent = it.name;
+  $('vSub').textContent = `${it.category} · ${instLabel(it)} · ${fmtDate(it.date)}`;
+  $('vPrev').style.display = $('vNext').style.display = visible.length > 1 ? '' : 'none';
+}
+const step = d => { if (!visible.length) return; viewIndex = (viewIndex + d + visible.length) % visible.length; showView(); };
+$('vPrev').onclick = () => step(-1);
+$('vNext').onclick = () => step(1);
+$('vClose').onclick = () => $('dlgView').close();
+$('vOpen').onclick = () => window.open(urlOf(visible[viewIndex]), '_blank');
+$('vDown').onclick = () => {
+  const it = visible[viewIndex];
+  const a = document.createElement('a');
+  a.href = urlOf(it);
+  a.download = it.name.replace(/\.[^.]+$/, '') + extOf(it.blob.type);
+  a.click();
+};
+$('vDel').onclick = async () => {
+  const it = visible[viewIndex];
+  if (!confirm(`¿Eliminar “${it.name}”? Esta acción no se puede deshacer.`)) return;
+  await dbDel(it.id);
+  freeUrl(it.id);
+  items = items.filter(i => i.id !== it.id);
+  $('dlgView').close();
+  render();
+  toast('Eliminado');
+};
+$('vEdit').onclick = () => openEdit(visible[viewIndex]);
+document.addEventListener('keydown', e => {
+  if (!$('dlgView').open || $('dlgEdit').open) return;
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+['dlgView', 'dlgAdd', 'dlgEdit'].forEach(id => {
+  $(id).addEventListener('click', e => { if (e.target === $(id)) $(id).close(); });
+});
+
+/* ---------- Editar ---------- */
+let editing = null;
+function fillCats(sel) { sel.innerHTML = ''; CATS.forEach(c => sel.add(new Option(c, c))); }
+fillCats($('eCat')); fillCats($('bCat'));
+function openEdit(it) {
+  editing = it;
+  $('eName').value = it.name;
+  $('eCat').value = it.category;
+  $('eInst').value = it.institution || '';
+  $('eDate').value = it.date || '';
+  $('dlgEdit').showModal();
+}
+$('editCancel').onclick = () => $('dlgEdit').close();
+$('editSave').onclick = async () => {
+  const name = $('eName').value.trim();
+  if (!name) { $('eName').focus(); return; }
+  Object.assign(editing, { name, category: $('eCat').value, institution: $('eInst').value.trim(), date: $('eDate').value });
+  await dbPut(editing);
+  $('dlgEdit').close();
+  const id = editing.id;
+  render();
+  const idx = visible.findIndex(i => i.id === id);
+  if (idx >= 0) { viewIndex = idx; showView(); } else $('dlgView').close();
+  toast('Cambios guardados');
+};
+
+/* ---------- Agregar ---------- */
+let pending = [];
+function resetAdd() {
+  pending.forEach(p => URL.revokeObjectURL(p.url));
+  pending = [];
+  $('rows').innerHTML = '';
+  $('bulkBox').hidden = true;
+  $('addSave').disabled = true;
+  $('bInst').value = ''; $('bDate').value = '';
+}
+$('btnAdd').onclick = () => {
+  resetAdd();
+  $('bCat').value = CATS.includes(state.cat) ? state.cat : 'Diplomas';
+  $('dlgAdd').showModal();
+};
+$('addCancel').onclick = () => $('dlgAdd').close();
+$('dlgAdd').addEventListener('close', resetAdd);
+$('drop').onclick = () => $('fileInput').click();
+$('fileInput').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
+['dragenter', 'dragover'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.add('over'); }));
+['dragleave', 'drop'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.remove('over'); }));
+$('drop').addEventListener('drop', e => addFiles([...e.dataTransfer.files]));
+
+function addFiles(files) {
+  const imgs = files.filter(f => f.type.startsWith('image/'));
+  if (imgs.length < files.length) toast('Se omitieron archivos que no son imágenes');
+  imgs.forEach(f => pending.push({
+    file: f, url: URL.createObjectURL(f),
+    name: f.name.replace(/\.[^.]+$/, ''),
+    category: $('bCat').value, institution: '', date: ''
+  }));
+  renderRows();
+}
+function renderRows() {
+  const rows = $('rows');
+  rows.innerHTML = '';
+  $('bulkBox').hidden = !pending.length;
+  $('addSave').disabled = !pending.length;
+  $('addSave').textContent = pending.length ? `Guardar ${pending.length}` : 'Guardar';
+  pending.forEach((p, i) => {
+    const r = document.createElement('div');
+    r.className = 'urow';
+    const img = document.createElement('img'); img.src = p.url;
+    const top = document.createElement('div'); top.className = 'top';
+    const nm = document.createElement('input'); nm.value = p.name; nm.placeholder = 'Nombre del archivo';
+    nm.oninput = () => p.name = nm.value;
+    const rm = document.createElement('button'); rm.className = 'danger small rm'; rm.textContent = 'Quitar';
+    rm.onclick = () => { URL.revokeObjectURL(p.url); pending.splice(i, 1); renderRows(); };
+    top.append(nm, rm);
+    const x = document.createElement('div'); x.className = 'x';
+    const cat = document.createElement('select'); fillCats(cat); cat.value = p.category; cat.onchange = () => p.category = cat.value;
+    const ins = document.createElement('input'); ins.placeholder = 'Institución'; ins.setAttribute('list', 'instList'); ins.value = p.institution; ins.oninput = () => p.institution = ins.value;
+    const dt = document.createElement('input'); dt.type = 'date'; dt.value = p.date; dt.onchange = () => p.date = dt.value;
+    x.append(cat, ins, dt);
+    r.append(img, top, x);
+    rows.appendChild(r);
+  });
+}
+$('bApply').onclick = () => {
+  pending.forEach(p => {
+    p.category = $('bCat').value;
+    if ($('bInst').value.trim()) p.institution = $('bInst').value.trim();
+    if ($('bDate').value) p.date = $('bDate').value;
+  });
+  renderRows();
+};
+$('addSave').onclick = async () => {
+  const bad = pending.find(p => !p.name.trim());
+  if (bad) { toast('Todos los archivos necesitan un nombre'); return; }
+  $('addSave').disabled = true;
+  const n = pending.length;
+  for (const p of pending) {
+    const it = { id: uid(), name: p.name.trim(), category: p.category, institution: p.institution.trim(), date: p.date, blob: p.file, added: Date.now() };
+    await dbPut(it);
+    items.push(it);
+  }
+  $('dlgAdd').close();
+  render();
+  toast(`${n} imagen${n === 1 ? '' : 'es'} guardada${n === 1 ? '' : 's'}`);
+};
+
+/* ---------- Respaldo ---------- */
+function extOf(type) { return type === 'image/webp' ? '.webp' : type === 'image/png' ? '.png' : type === 'image/jpeg' ? '.jpg' : '.img'; }
+$('btnBackup').onclick = async () => {
+  if (!items.length) { toast('No hay nada que respaldar'); return; }
+  const zip = new JSZip();
+  const meta = items.map(i => ({ id: i.id, name: i.name, category: i.category, institution: i.institution, date: i.date, type: i.blob.type, file: 'imagenes/' + i.id + extOf(i.blob.type) }));
+  zip.file('datos.json', JSON.stringify(meta, null, 2));
+  meta.forEach((m, k) => zip.file(m.file, items[k].blob));
+  toast('Preparando respaldo…');
+  const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'reconocimientos-respaldo-' + new Date().toISOString().slice(0, 10) + '.zip';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+};
+$('btnRestore').onclick = () => $('restoreInput').click();
+$('restoreInput').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = '';
+  if (!f) return;
+  try {
+    const zip = await JSZip.loadAsync(f);
+    const meta = JSON.parse(await zip.file('datos.json').async('string'));
+    let added = 0;
+    for (const m of meta) {
+      if (items.some(i => i.id === m.id)) continue;
+      const entry = zip.file(m.file);
+      if (!entry) continue;
+      const blob = new Blob([await entry.async('arraybuffer')], { type: m.type || 'image/webp' });
+      const it = { id: m.id, name: m.name, category: CATS.includes(m.category) ? m.category : 'Otros', institution: m.institution || '', date: m.date || '', blob, added: Date.now() };
+      await dbPut(it); items.push(it); added++;
+    }
+    render();
+    toast(added ? `${added} restaurada${added === 1 ? '' : 's'}` : 'No había nada nuevo que restaurar');
+  } catch (err) {
+    toast('No se pudo leer ese respaldo');
+  }
+};
+
+/* ---------- Inicio ---------- */
+(async () => {
+  try {
+    db = await openDB();
+    items = await dbAll();
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+  } catch (err) {
+    toast('Tu navegador no permite guardar datos locales');
+  }
+  render();
+})();
+</script>
+</body>
+</html>
