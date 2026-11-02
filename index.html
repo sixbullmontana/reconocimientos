@@ -89,6 +89,9 @@
   .vclose:hover { background: rgba(0,0,0,.65); }
   .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 99; }
   .toast.show { opacity: 1; }
+  body:not(.is-admin) .admin-only { display: none !important; }
+  .errmsg { color: var(--err); font-size: 13px; margin-bottom: 4px; }
+  code { background: var(--bg); padding: 1px 5px; border-radius: 5px; font-size: 12px; }
   @media (max-width: 520px) { .urow { grid-template-columns: 56px 1fr; } .urow .top { grid-column: 2; } }
 </style>
 </head>
@@ -100,9 +103,11 @@
       <p class="sub" id="summary">Tu colección de diplomas, certificados y más.</p>
     </div>
     <div class="actions">
-      <button id="btnAdd">+ Agregar imágenes</button>
-      <button class="ghost" id="btnBackup">Respaldar</button>
-      <button class="ghost" id="btnRestore">Restaurar</button>
+      <button id="btnAdd" class="admin-only">+ Agregar imágenes</button>
+      <button class="ghost admin-only" id="btnBackup">Respaldar</button>
+      <button class="ghost admin-only" id="btnRestore">Restaurar</button>
+      <button class="ghost admin-only" id="btnKey">Cambiar clave</button>
+      <button class="ghost" id="btnLogin">🔒 Acceso admin</button>
       <input type="file" id="restoreInput" accept=".zip" hidden>
     </div>
   </header>
@@ -180,9 +185,39 @@
     <div class="actions">
       <button class="ghost small" id="vOpen">Abrir en pestaña nueva</button>
       <button class="ghost small" id="vDown">Descargar</button>
-      <button class="ghost small" id="vEdit">Editar</button>
-      <button class="danger small" id="vDel">Eliminar</button>
+      <button class="ghost small admin-only" id="vEdit">Editar</button>
+      <button class="danger small admin-only" id="vDel">Eliminar</button>
     </div>
+  </div>
+</dialog>
+
+<!-- Acceso admin -->
+<dialog id="dlgLogin" style="width:min(380px,94vw)">
+  <form class="dlg" id="loginForm" autocomplete="off">
+    <h2>Acceso de administrador</h2>
+    <p class="sub" style="margin-bottom:14px">Escribe la palabra clave para poder agregar, editar o respaldar.</p>
+    <div class="field"><label for="loginPass">Palabra clave</label><input id="loginPass" type="password" autocomplete="off"></div>
+    <div class="errmsg" id="loginErr" hidden>Palabra clave incorrecta</div>
+    <div class="foot">
+      <button type="button" class="ghost" id="loginCancel">Cancelar</button>
+      <button type="submit">Entrar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Cambiar clave -->
+<dialog id="dlgKey" style="width:min(520px,94vw)">
+  <div class="dlg">
+    <h2>Cambiar palabra clave</h2>
+    <p class="sub" style="margin-bottom:14px">Escribe la nueva clave y se generará un código. Pégalo en el archivo <b>index.html</b> (en GitHub) para reemplazar el valor de <b>ADMIN_HASH</b>.</p>
+    <div class="field"><label for="newPass">Nueva palabra clave</label><input id="newPass" type="text" autocomplete="off" placeholder="Mínimo 8 caracteres"></div>
+    <button id="genHash" class="ghost">Generar código</button>
+    <div id="hashOut" hidden style="margin-top:14px">
+      <label>Tu nuevo código (cópialo completo)</label>
+      <input id="hashVal" readonly style="width:100%;font-family:monospace;font-size:12px">
+      <p class="sub" style="margin:10px 0 0;font-size:13px">En GitHub abre <b>index.html</b>, pulsa el lápiz ✏️, busca la línea <code>const ADMIN_HASH = '…'</code>, reemplaza lo que va entre comillas por este código y guarda con <b>Commit changes</b>. La clave nueva funciona en cuanto se actualice la página.</p>
+    </div>
+    <div class="foot"><button class="ghost" id="keyClose">Cerrar</button></div>
   </div>
 </dialog>
 
@@ -192,6 +227,10 @@
 <script>
 const CATS = ['Diplomas', 'Certificados', 'Constancias', 'Reconocimientos', 'Otros'];
 const NONE = '__none__';
+// Código (hash) de la palabra clave de administrador. Clave inicial: cambiame123
+// Para cambiarla usa el botón "Cambiar clave" dentro del modo admin y pega aquí el nuevo código.
+const ADMIN_HASH = '17d4bec217801999a1f3ee4fda0b5c5a5ef63bbac71e21b91934e8f09fd613d5';
+let isAdmin = false;
 const $ = id => document.getElementById(id);
 
 let db, items = [];
@@ -231,6 +270,45 @@ function fmtDate(d) {
   return new Date(y, m - 1, dd).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 const instLabel = it => it.institution || 'Sin institución';
+
+/* ---------- Acceso de administrador ---------- */
+async function sha(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('rec:' + s));
+  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function setAdmin(v) {
+  isAdmin = v;
+  document.body.classList.toggle('is-admin', v);
+  $('btnLogin').textContent = v ? 'Cerrar sesión admin' : '🔒 Acceso admin';
+  if (!v) ['dlgAdd', 'dlgEdit', 'dlgKey'].forEach(id => { if ($(id).open) $(id).close(); });
+}
+$('btnLogin').onclick = () => {
+  if (isAdmin) { setAdmin(false); toast('Sesión de administrador cerrada'); return; }
+  $('loginPass').value = ''; $('loginErr').hidden = true;
+  $('dlgLogin').showModal();
+  $('loginPass').focus();
+};
+$('loginCancel').onclick = () => $('dlgLogin').close();
+$('loginForm').onsubmit = async e => {
+  e.preventDefault();
+  let ok = false;
+  try { ok = (await sha($('loginPass').value)) === ADMIN_HASH; } catch (err) { toast('Tu navegador no permite verificar la clave'); return; }
+  if (ok) { $('dlgLogin').close(); setAdmin(true); toast('Modo administrador activado'); }
+  else { await new Promise(r => setTimeout(r, 700)); $('loginErr').hidden = false; $('loginPass').select(); }
+};
+$('btnKey').onclick = () => {
+  if (!isAdmin) return;
+  $('newPass').value = ''; $('hashOut').hidden = true;
+  $('dlgKey').showModal();
+};
+$('keyClose').onclick = () => $('dlgKey').close();
+$('genHash').onclick = async () => {
+  const v = $('newPass').value;
+  if (v.length < 8) { toast('Usa al menos 8 caracteres'); return; }
+  $('hashVal').value = await sha(v);
+  $('hashOut').hidden = false;
+  $('hashVal').select();
+};
 
 /* ---------- Render principal ---------- */
 function render() {
@@ -348,6 +426,7 @@ $('vDown').onclick = () => {
   a.click();
 };
 $('vDel').onclick = async () => {
+  if (!isAdmin) return;
   const it = visible[viewIndex];
   if (!confirm(`¿Eliminar “${it.name}”? Esta acción no se puede deshacer.`)) return;
   await dbDel(it.id);
@@ -357,13 +436,13 @@ $('vDel').onclick = async () => {
   render();
   toast('Eliminado');
 };
-$('vEdit').onclick = () => openEdit(visible[viewIndex]);
+$('vEdit').onclick = () => { if (isAdmin) openEdit(visible[viewIndex]); };
 document.addEventListener('keydown', e => {
   if (!$('dlgView').open || $('dlgEdit').open) return;
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(1);
 });
-['dlgView', 'dlgAdd', 'dlgEdit'].forEach(id => {
+['dlgView', 'dlgAdd', 'dlgEdit', 'dlgLogin', 'dlgKey'].forEach(id => {
   $(id).addEventListener('click', e => { if (e.target === $(id)) $(id).close(); });
 });
 
@@ -381,6 +460,7 @@ function openEdit(it) {
 }
 $('editCancel').onclick = () => $('dlgEdit').close();
 $('editSave').onclick = async () => {
+  if (!isAdmin) return;
   const name = $('eName').value.trim();
   if (!name) { $('eName').focus(); return; }
   Object.assign(editing, { name, category: $('eCat').value, institution: $('eInst').value.trim(), date: $('eDate').value });
@@ -404,6 +484,7 @@ function resetAdd() {
   $('bInst').value = ''; $('bDate').value = '';
 }
 $('btnAdd').onclick = () => {
+  if (!isAdmin) return;
   resetAdd();
   $('bCat').value = CATS.includes(state.cat) ? state.cat : 'Diplomas';
   $('dlgAdd').showModal();
@@ -460,6 +541,7 @@ $('bApply').onclick = () => {
   renderRows();
 };
 $('addSave').onclick = async () => {
+  if (!isAdmin) return;
   const bad = pending.find(p => !p.name.trim());
   if (bad) { toast('Todos los archivos necesitan un nombre'); return; }
   $('addSave').disabled = true;
@@ -477,6 +559,7 @@ $('addSave').onclick = async () => {
 /* ---------- Respaldo ---------- */
 function extOf(type) { return type === 'image/webp' ? '.webp' : type === 'image/png' ? '.png' : type === 'image/jpeg' ? '.jpg' : '.img'; }
 $('btnBackup').onclick = async () => {
+  if (!isAdmin) return;
   if (!items.length) { toast('No hay nada que respaldar'); return; }
   const zip = new JSZip();
   const meta = items.map(i => ({ id: i.id, name: i.name, category: i.category, institution: i.institution, date: i.date, type: i.blob.type, file: 'imagenes/' + i.id + extOf(i.blob.type) }));
@@ -490,10 +573,10 @@ $('btnBackup').onclick = async () => {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 };
-$('btnRestore').onclick = () => $('restoreInput').click();
+$('btnRestore').onclick = () => { if (isAdmin) $('restoreInput').click(); };
 $('restoreInput').onchange = async e => {
   const f = e.target.files[0]; e.target.value = '';
-  if (!f) return;
+  if (!f || !isAdmin) return;
   try {
     const zip = await JSZip.loadAsync(f);
     const meta = JSON.parse(await zip.file('datos.json').async('string'));
