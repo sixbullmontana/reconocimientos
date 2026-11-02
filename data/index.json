@@ -1485,6 +1485,60 @@
       "date": "2026-09-17",
       "file": "data/images/mvyz6j30no0ya6.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyzba71164h4u",
+      "name": "Liderazgo y Negociación para gestión de Talento",
+      "category": "Diplomas",
+      "institution": "Coursera Especialización",
+      "date": "2026-09-18",
+      "file": "data/images/mvyzba71164h4u.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyzbcf948673d",
+      "name": "Medical School Anatomy and Physiology II",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-09-17",
+      "file": "data/images/mvyzbcf948673d.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyzbemtsraybk",
+      "name": "Strategic Management",
+      "category": "Diplomas",
+      "institution": "Coursera Especialización",
+      "date": "2026-07-27",
+      "file": "data/images/mvyzbemtsraybk.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyzbgn0erz8xq",
+      "name": "Comunicación de Alto Impacto para Líderes de Equipos",
+      "category": "Diplomas",
+      "institution": "Coursera Especialización",
+      "date": "2026-09-16",
+      "file": "data/images/mvyzbgn0erz8xq.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyzbihpjr12jl",
+      "name": "Liderazgo Ágil para Product Managers",
+      "category": "Diplomas",
+      "institution": "Coursera Especialización",
+      "date": "2026-09-16",
+      "file": "data/images/mvyzbihpjr12jl.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyzbk97aiaikm",
+      "name": "Medical-Surgical Nursing: Cardiovascular & ECG Essentials",
+      "category": "Diplomas",
+      "institution": "Coursera Especialización",
+      "date": "2026-09-17",
+      "file": "data/images/mvyzbk97aiaikm.webp",
+      "type": "image/webp"
     }
   ]
 }
