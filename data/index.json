@@ -1917,6 +1917,51 @@
       "date": "2025-02-21",
       "file": "data/images/mvz3bqqlyfdo7l.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz3j45nkrjmks",
+      "name": "Certificación Internacional en Coaching Expansivo",
+      "category": "Certificados",
+      "institution": "MB CONSULTORES",
+      "date": "2020-12-14",
+      "file": "data/images/mvz3j45nkrjmks.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz3j6n8qrvf2m",
+      "name": "Certificación de Programación Neurolingüística Nivel 1 - Básico",
+      "category": "Certificados",
+      "institution": "MB CONSULTORES",
+      "date": "2020-12-14",
+      "file": "data/images/mvz3j6n8qrvf2m.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz3j8nntq4mo9",
+      "name": "Certificación de Programación Neurolingüística Nivel 2 - Intermedio",
+      "category": "Certificados",
+      "institution": "MB CONSULTORES",
+      "date": "2021-12-14",
+      "file": "data/images/mvz3j8nntq4mo9.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz3jawtuin76c",
+      "name": "Coaching con Programación Neurolingüística",
+      "category": "Certificados",
+      "institution": "MB CONSULTORES",
+      "date": "2021-12-14",
+      "file": "data/images/mvz3jawtuin76c.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz3jcwd77ciyg",
+      "name": "Coach de Vida",
+      "category": "Certificados",
+      "institution": "MB CONSULTORES",
+      "date": "2022-05-05",
+      "file": "data/images/mvz3jcwd77ciyg.webp",
+      "type": "image/webp"
     }
   ]
 }
