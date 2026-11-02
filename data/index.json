@@ -1125,6 +1125,15 @@
       "date": "2026-09-03",
       "file": "data/images/mvyy5024cnlrq4.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyy5ifggs5dh4",
+      "name": "Ruta de Programación con Typescript",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-09-03",
+      "file": "data/images/mvyy5ifggs5dh4.webp",
+      "type": "image/webp"
     }
   ]
 }
