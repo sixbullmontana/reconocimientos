@@ -1269,6 +1269,15 @@
       "date": "2026-09-01",
       "file": "data/images/mvyygs024p8ufd.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyyhhpmyjkjc9",
+      "name": "Curso de Antigravity",
+      "category": "Diplomas",
+      "institution": "Platzi Cursos",
+      "date": "2026-09-05",
+      "file": "data/images/mvyyhhpmyjkjc9.webp",
+      "type": "image/webp"
     }
   ]
 }
