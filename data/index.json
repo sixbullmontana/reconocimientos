@@ -1242,6 +1242,15 @@
       "date": "2026-09-06",
       "file": "data/images/mvyycocbddozti.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyyf3oao6heyr",
+      "name": "Curso de Obsidian",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-10-30",
+      "file": "data/images/mvyyf3oao6heyr.webp",
+      "type": "image/webp"
     }
   ]
 }
