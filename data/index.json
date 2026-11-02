@@ -1638,6 +1638,15 @@
       "date": "2021-04-17",
       "file": "data/images/mvz2f73mnw2qj0.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz2fu9f002j17",
+      "name": "BBP (Bloodborne Pathogens)",
+      "category": "Certificados",
+      "institution": "Advanced Medical Certification",
+      "date": "2024-12-21",
+      "file": "data/images/mvz2fu9f002j17.webp",
+      "type": "image/webp"
     }
   ]
 }
