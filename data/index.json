@@ -1962,6 +1962,24 @@
       "date": "2022-05-05",
       "file": "data/images/mvz3jcwd77ciyg.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz3lof7whjluh",
+      "name": "Certificación Azure Fundamentals AZ-900",
+      "category": "Certificados",
+      "institution": "Microsoft",
+      "date": "2021-09-18",
+      "file": "data/images/mvz3lof7whjluh.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz3lqr29uo74h",
+      "name": "Microsoft Advertising Certified Professional",
+      "category": "Constancias",
+      "institution": "Microsoft",
+      "date": "2020-07-06",
+      "file": "data/images/mvz3lqr29uo74h.webp",
+      "type": "image/webp"
     }
   ]
 }
