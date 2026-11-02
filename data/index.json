@@ -1440,6 +1440,51 @@
       "date": "2026-05-24",
       "file": "data/images/mvyyyz4ouqzr2p.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvyz6a1quqdo23",
+      "name": "Nursing Prerequisites: Essentials Sciences for Future Nurses",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-09-23",
+      "file": "data/images/mvyz6a1quqdo23.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyz6cs0945xn4",
+      "name": "Google Business Intelligence",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-05-23",
+      "file": "data/images/mvyz6cs0945xn4.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyz6f3g8t0e5a",
+      "name": "Microsoft Team Management",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-09-17",
+      "file": "data/images/mvyz6f3g8t0e5a.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyz6h3hpulot2",
+      "name": "ACE Health Coach",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-09-15",
+      "file": "data/images/mvyz6h3hpulot2.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvyz6j30no0ya6",
+      "name": "Medical School Anatomy and Physiology I",
+      "category": "Diplomas",
+      "institution": "Coursera Certificado Profesional",
+      "date": "2026-09-17",
+      "file": "data/images/mvyz6j30no0ya6.webp",
+      "type": "image/webp"
     }
   ]
 }
