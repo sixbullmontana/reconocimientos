@@ -1719,6 +1719,15 @@
       "date": "2020-08-20",
       "file": "data/images/mvz2ook0bcv001.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz2q174xqmdnd",
+      "name": "Diplomado Técnico en Inteligencia de Negocios",
+      "category": "Diplomas",
+      "institution": "Capacitate Para El Empleo - Diploma",
+      "date": "2020-12-13",
+      "file": "data/images/mvz2q174xqmdnd.webp",
+      "type": "image/webp"
     }
   ]
 }
