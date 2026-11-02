@@ -1773,6 +1773,78 @@
       "date": "2020-06-05",
       "file": "data/images/mvz2tltca3fs3a.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz30o26orudcg",
+      "name": "Cyber Security Foundation",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2022-11-25",
+      "file": "data/images/mvz30o26orudcg.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz30qmvk5e3c9",
+      "name": "Scrum Foundation Professional Certificate",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2020-07-08",
+      "file": "data/images/mvz30qmvk5e3c9.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz30sa9xg5p5m",
+      "name": "Digital Marketing Professional Certificate DMPC",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2022-03-02",
+      "file": "data/images/mvz30sa9xg5p5m.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz30ucy6p2waj",
+      "name": "Kanban Foundation KIKF",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2022-11-30",
+      "file": "data/images/mvz30ucy6p2waj.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz30wi38qappc",
+      "name": "Kanban Essentials Profesional Certificate KEPC",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2021-11-03",
+      "file": "data/images/mvz30wi38qappc.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz30ygdjn3lam",
+      "name": "Fundamentos de la Ley General de Protección de Datos LGPDF",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2023-11-01",
+      "file": "data/images/mvz30ygdjn3lam.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz310esqytalw",
+      "name": "Remote Work and Virtual Collaboration RWVCPC",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2022-12-03",
+      "file": "data/images/mvz310esqytalw.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mvz312k3o2kx2h",
+      "name": "Scrum Master Professional Certificate SMPC",
+      "category": "Certificados",
+      "institution": "Certiprof",
+      "date": "2022-04-15",
+      "file": "data/images/mvz312k3o2kx2h.webp",
+      "type": "image/webp"
     }
   ]
 }
