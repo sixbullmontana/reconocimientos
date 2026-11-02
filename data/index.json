@@ -1764,6 +1764,15 @@
       "date": "2020-08-27",
       "file": "data/images/mvz2sxghokx7c2.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz2tltca3fs3a",
+      "name": "Diplomado Técnico en Sistemas Informáticos",
+      "category": "Diplomas",
+      "institution": "Capacitate Para El Empleo - Diploma",
+      "date": "2020-06-05",
+      "file": "data/images/mvz2tltca3fs3a.webp",
+      "type": "image/webp"
     }
   ]
 }
