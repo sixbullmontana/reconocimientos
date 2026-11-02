@@ -1854,6 +1854,15 @@
       "date": "2020-08-01",
       "file": "data/images/mvz32l6emsiixu.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mvz33z66ne4891",
+      "name": "Diplomado en Seguros",
+      "category": "Diplomas",
+      "institution": "Comisión Nacional para la Protección y Defensa de los Usuarios de Servicios Financieros (CONDUSEF)",
+      "date": "2022-02-08",
+      "file": "data/images/mvz33z66ne4891.webp",
+      "type": "image/webp"
     }
   ]
 }
