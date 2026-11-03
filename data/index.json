@@ -2097,6 +2097,15 @@
       "date": "2020-09-15",
       "file": "data/images/mw119orysglrpc.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw11akqoi1xn43",
+      "name": "Diplomado de Técnico en Integración Web",
+      "category": "Diplomas",
+      "institution": "SEP",
+      "date": "2020-09-15",
+      "file": "data/images/mw11akqoi1xn43.webp",
+      "type": "image/webp"
     }
   ]
 }
