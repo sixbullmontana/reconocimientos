@@ -2214,6 +2214,15 @@
       "date": "2024-12-28",
       "file": "data/images/mw11k6ec5ve7nc.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw11kmhoszfkez",
+      "name": "Curso Básico de SQL",
+      "category": "Constancias",
+      "institution": "Académica",
+      "date": "2021-07-18",
+      "file": "data/images/mw11kmhoszfkez.webp",
+      "type": "image/webp"
     }
   ]
 }
