@@ -2169,6 +2169,33 @@
       "date": "2024-12-28",
       "file": "data/images/mw11gi25n405go.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw11imktoimck7",
+      "name": "Administración de Proyectos",
+      "category": "Constancias",
+      "institution": "Académica",
+      "date": "2024-12-28",
+      "file": "data/images/mw11imktoimck7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw11ioxlj8643a",
+      "name": "Análisis Económico y Financiero de Proyectos de Inversión",
+      "category": "Constancias",
+      "institution": "Académica",
+      "date": "2024-12-28",
+      "file": "data/images/mw11ioxlj8643a.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw11ir59u2uyo9",
+      "name": "Aplicación de hija de cálculo Excel, interés simple, interés compuesto",
+      "category": "Constancias",
+      "institution": "Académica",
+      "date": "2024-12-28",
+      "file": "data/images/mw11ir59u2uyo9.webp",
+      "type": "image/webp"
     }
   ]
 }
