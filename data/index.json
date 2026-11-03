@@ -2088,6 +2088,15 @@
       "date": "2024-10-07",
       "file": "data/images/mw11817y3pd8s9.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw119orysglrpc",
+      "name": "Diplomado de Técnico en Sistemas Infromáticos",
+      "category": "Diplomas",
+      "institution": "SEP",
+      "date": "2020-09-15",
+      "file": "data/images/mw119orysglrpc.webp",
+      "type": "image/webp"
     }
   ]
 }
