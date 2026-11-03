@@ -2529,6 +2529,15 @@
       "date": "2022-02-02",
       "file": "data/images/mw12m32egtxyzk.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw12n0jal10g1i",
+      "name": "Introduction to SQL",
+      "category": "Constancias",
+      "institution": "DATACAMP",
+      "date": "2025-06-06",
+      "file": "data/images/mw12n0jal10g1i.webp",
+      "type": "image/webp"
     }
   ]
 }
