@@ -3528,6 +3528,69 @@
       "date": "2026-01-08",
       "file": "data/images/mw1n0ectjmg0xr.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1narmrd3ccro",
+      "name": "Curso Básico de Evaluación de Estructuras",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-18",
+      "file": "data/images/mw1narmrd3ccro.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1natr38k3hue",
+      "name": "Las Emergencias y sus Efectos Psicológicos",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-18",
+      "file": "data/images/mw1natr38k3hue.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1navhvwh9j84",
+      "name": "Prevención de Riesgos en tu Escuela",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-18",
+      "file": "data/images/mw1navhvwh9j84.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1naxa35e6qx7",
+      "name": "Introducción a la Historia Global y de la Globalización",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1naxa35e6qx7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1naz0htmqakj",
+      "name": "La Naturaleza ante los Clásicos Marx, Durkheim, Weber",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1naz0htmqakj.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1nb0kvti2om3",
+      "name": "Movilidad Humana y Periodismo en México: Construyendo Nuevas Narrativas",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1nb0kvti2om3.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1nb2bnhuh22g",
+      "name": "Si te Drogas, te Dañas - Estrategia en el Aula: Prevención de Adicciones",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-07-18",
+      "file": "data/images/mw1nb2bnhuh22g.webp",
+      "type": "image/webp"
     }
   ]
 }
