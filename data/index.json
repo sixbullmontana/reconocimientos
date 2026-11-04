@@ -3429,6 +3429,42 @@
       "date": "2026-04-21",
       "file": "data/images/mw1mky201jyyh2.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1mp4pzzqvmz3",
+      "name": "Ruta de Administración Básica de Servidores Linux",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-21",
+      "file": "data/images/mw1mp4pzzqvmz3.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mp7atmfgkvm",
+      "name": "Ruta de Programación con GO y RUST",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-22",
+      "file": "data/images/mw1mp7atmfgkvm.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mp9ef3qbobw",
+      "name": "Curso de Oratoria Profesional",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-04-28",
+      "file": "data/images/mw1mp9ef3qbobw.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mpbggiz8vma",
+      "name": "Ruta de Social Media Marketing y Community Management",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-28",
+      "file": "data/images/mw1mpbggiz8vma.webp",
+      "type": "image/webp"
     }
   ]
 }
