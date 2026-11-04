@@ -2907,6 +2907,51 @@
       "date": "",
       "file": "data/images/mw1kzm5hr0oxp0.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1l2x7lwiibgp",
+      "name": "Ruta de Filosofía y Estrategia para Líderes",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1l2x7lwiibgp.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1l2zeok9rasz",
+      "name": "Ruta de Finanzas Descentralizadas (DEFI) y Criptoactivos",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1l2zeok9rasz.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1l31i4aq3eol",
+      "name": "Ruta de Finanzas y Estrategia para Startups",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1l31i4aq3eol.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1l33hrdp93si",
+      "name": "Ruta de Fotografía y Diseño Gráfico para Contenido Digital",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1l33hrdp93si.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1l35cjo5gsaq",
+      "name": "Ruta de Fundamentos de Ciberseguridad",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1l35cjo5gsaq.webp",
+      "type": "image/webp"
     }
   ]
 }
