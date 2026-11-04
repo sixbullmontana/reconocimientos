@@ -2952,6 +2952,33 @@
       "date": "2025-11-07",
       "file": "data/images/mw1l35cjo5gsaq.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1leogo6lo2or",
+      "name": "Ruta de Fundamentos de Finanzas Personales y Corporativas",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1leogo6lo2or.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1leqj8mn4kd1",
+      "name": "Ruta de Fundamentos y Cultura Organizaciónal en RRHH",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1leqj8mn4kd1.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lesb917hgqy",
+      "name": "Ruta de Gestión de Proyectos y Metodologías Ágiles",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1lesb917hgqy.webp",
+      "type": "image/webp"
     }
   ]
 }
