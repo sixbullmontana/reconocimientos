@@ -2772,6 +2772,42 @@
       "date": "2025-11-09",
       "file": "data/images/mw1kpvjf7x5eeb.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1ks3l78pnpk5",
+      "name": "Ruta de AI y Automatización en Recursos Humanos",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1ks3l78pnpk5.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ks5of2sqens",
+      "name": "Ruta de Análisis y Valoración Financiera",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1ks5of2sqens.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ks7duhgdvgp",
+      "name": "Ruta de Aspectos Legales y Cumplimiento",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1ks7duhgdvgp.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ks95khghu5v",
+      "name": "Ruta de Bases de datos para Web",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1ks95khghu5v.webp",
+      "type": "image/webp"
     }
   ]
 }
