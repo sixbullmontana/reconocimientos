@@ -2808,6 +2808,42 @@
       "date": "2025-11-10",
       "file": "data/images/mw1ks95khghu5v.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1kuroz612nev",
+      "name": "Ruta de Comunicación Avanzada y Oratoria",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1kuroz612nev.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kutmo2bu3do",
+      "name": "Ruta de Contenido Interactivo y Realidad Aumentada",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1kutmo2bu3do.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kuvjng5swxa",
+      "name": "Ruta de Creación de Contenido para Redes Sociales",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1kuvjng5swxa.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kuxh2b0cdtj",
+      "name": "Ruta de Cultura y Employee Experience",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1kuxh2b0cdtj.webp",
+      "type": "image/webp"
     }
   ]
 }
