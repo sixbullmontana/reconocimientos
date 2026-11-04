@@ -3492,6 +3492,15 @@
       "date": "2026-01-09",
       "file": "data/images/mw1mrvwlu2804s.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1muz4us0ip6d",
+      "name": "Consulta de Nutrición con Inteligencia Artificial",
+      "category": "Constancias",
+      "institution": "Nutrimind",
+      "date": "2026-03-16",
+      "file": "data/images/mw1muz4us0ip6d.jpg",
+      "type": "image/jpeg"
     }
   ]
 }
