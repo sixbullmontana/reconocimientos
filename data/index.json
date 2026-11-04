@@ -3294,6 +3294,78 @@
       "date": "2025-11-09",
       "file": "data/images/mw1m6pxk1ykoul.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1mc15twaihn6",
+      "name": "Curso de Configuración de APIs de LLMS",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-15",
+      "file": "data/images/mw1mc15twaihn6.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mc38p69silu",
+      "name": "Curso de Inteligencia Emocional",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-14",
+      "file": "data/images/mw1mc38p69silu.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mc50zznyu95",
+      "name": "Curso de Contabilidad Básica con SIIGO",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-05",
+      "file": "data/images/mw1mc50zznyu95.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mc6qr45yfwu",
+      "name": "Curso de Cultura Organizacional",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-15",
+      "file": "data/images/mw1mc6qr45yfwu.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mc8h5u3r0eb",
+      "name": "Curso de Pensamiento Crítico para Usar Inteligencia Artificial",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-15",
+      "file": "data/images/mw1mc8h5u3r0eb.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mca6nalxvtw",
+      "name": "Curso de OpenClaw",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-15",
+      "file": "data/images/mw1mca6nalxvtw.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mcbv0pu1css",
+      "name": "Curso de Ética y Manejo de Datos para Inteligencia Artificial",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-14",
+      "file": "data/images/mw1mcbv0pu1css.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mcdhx8o2uob",
+      "name": "Curso de Herramientas de AI para Developers",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2026-05-15",
+      "file": "data/images/mw1mcdhx8o2uob.webp",
+      "type": "image/webp"
     }
   ]
 }
