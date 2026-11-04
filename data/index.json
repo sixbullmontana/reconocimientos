@@ -2862,6 +2862,51 @@
       "date": "2025-11-10",
       "file": "data/images/mw1kwcpbe18ab8.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1kzepdbfg4qp",
+      "name": "Ruta de Desarrollo Backend con Python",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1kzepdbfg4qp.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kzguawrtnzq",
+      "name": "Ruta de Desarrollo y Evaluación de Liderazgo",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1kzguawrtnzq.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kziha9nyv5v",
+      "name": "Ruta de Gestión y Desarrollo de Talento",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1kziha9nyv5v.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kzk92er44ms",
+      "name": "Ruta de Diseño y Desarrollo Frontend",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1kzk92er44ms.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kzm5hr0oxp0",
+      "name": "Ruta de Ready for Work en Finanzas e Inversiones",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "",
+      "file": "data/images/mw1kzm5hr0oxp0.webp",
+      "type": "image/webp"
     }
   ]
 }
