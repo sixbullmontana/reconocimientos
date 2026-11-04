@@ -3708,6 +3708,60 @@
       "date": "2025-11-09",
       "file": "data/images/mw1nizjwax7vol.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1npp6xbw06c5",
+      "name": "Finanzas Personales",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-11-09",
+      "file": "data/images/mw1npp6xbw06c5.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1npr2xjdbx0t",
+      "name": "Diseño de Experiencias Educativas Virtuales",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1npr2xjdbx0t.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1npsu1ri26my",
+      "name": "Saberes Digitales para Docentes Nivel 2",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1npsu1ri26my.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1npv2uns1u4y",
+      "name": "Saberes Digitales para Docentes Nivel 1",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-20",
+      "file": "data/images/mw1npv2uns1u4y.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1npwnbgegiyj",
+      "name": "Migración, Derechos Humanos y Protección de Personas Extranjeras en México",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-30",
+      "file": "data/images/mw1npwnbgegiyj.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1npyn8ws2h0x",
+      "name": "Movilidad Humana e Identificación de Personas Migrantes Víctimas de Trata y Objeto de Tráfico Ilícito",
+      "category": "Constancias",
+      "institution": "Aprende MX",
+      "date": "2025-12-31",
+      "file": "data/images/mw1npyn8ws2h0x.webp",
+      "type": "image/webp"
     }
   ]
 }
