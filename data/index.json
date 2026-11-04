@@ -3402,6 +3402,33 @@
       "date": "2026-04-28",
       "file": "data/images/mw1miulc10upu8.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1mku4w201eu7",
+      "name": "Ruta de Publicidad Digital y Pai Media",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-28",
+      "file": "data/images/mw1mku4w201eu7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mkwbtwrhb1v",
+      "name": "Ruta de Periodismo e Investigación Digital",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-28",
+      "file": "data/images/mw1mkwbtwrhb1v.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mky201jyyh2",
+      "name": "Ruta de Programación con C y C++",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-21",
+      "file": "data/images/mw1mky201jyyh2.webp",
+      "type": "image/webp"
     }
   ]
 }
