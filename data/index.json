@@ -3222,6 +3222,78 @@
       "date": "2025-11-09",
       "file": "data/images/mw1lzzr4y3xj7b.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1m6d2icc4aoa",
+      "name": "Curso de herramientas No-Code para Productividad",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1m6d2icc4aoa.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6f84w0uil6",
+      "name": "Curso de People Analytics para RRHH",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1m6f84w0uil6.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6guf1wbhvd",
+      "name": "Curso de Periodismo Móvil",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1m6guf1wbhvd.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6ipquoob8i",
+      "name": "Curso de Periodismo Tecnológico",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1m6ipquoob8i.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6kjyrzvxk9",
+      "name": "Curso de Power BI",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1m6kjyrzvxk9.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6maaecu9qg",
+      "name": "Curso de Introducción a la Terminal y Línea de Comandos",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1m6maaecu9qg.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6o39whn1n7",
+      "name": "Curso de Hacks para Redactar Titulares",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1m6o39whn1n7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1m6pxk1ykoul",
+      "name": "Curso de Automatización de Procesos con Zapier",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1m6pxk1ykoul.webp",
+      "type": "image/webp"
     }
   ]
 }
