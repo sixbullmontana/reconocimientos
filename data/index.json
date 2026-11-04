@@ -3762,6 +3762,33 @@
       "date": "2025-12-31",
       "file": "data/images/mw1npyn8ws2h0x.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1nrxlt6bjpnm",
+      "name": "Marketing Digital I",
+      "category": "Constancias",
+      "institution": "ICAT",
+      "date": "2025-03-26",
+      "file": "data/images/mw1nrxlt6bjpnm.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1nrzybl2do8q",
+      "name": "Marketing Digital II",
+      "category": "Constancias",
+      "institution": "ICAT",
+      "date": "2025-03-26",
+      "file": "data/images/mw1nrzybl2do8q.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ns1xlotrmmm",
+      "name": "Programa de Orientación Formativo Laboral",
+      "category": "Constancias",
+      "institution": "ICAT",
+      "date": "2025-03-26",
+      "file": "data/images/mw1ns1xlotrmmm.webp",
+      "type": "image/webp"
     }
   ]
 }
