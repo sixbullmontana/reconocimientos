@@ -3042,6 +3042,60 @@
       "date": "2025-11-07",
       "file": "data/images/mw1lp7wqyf36ve.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1lrzotvi3wm7",
+      "name": "Ruta de Amazon Web Services",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lrzotvi3wm7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ls1oo411f2b",
+      "name": "Ruta de Microsoft Azure",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1ls1oo411f2b.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ls3t719dtwr",
+      "name": "Ruta de Producción de Video para Plataformas Digitales",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1ls3t719dtwr.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ls64xpfdcr0",
+      "name": "Ruta de Programación con Python",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1ls64xpfdcr0.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ls7vrifca8g",
+      "name": "Ruta de Atracción y Selección de Talento",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1ls7vrifca8g.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1ls9qw6r3gjt",
+      "name": "Ruta de Atracción y Selección de Talento",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1ls9qw6r3gjt.webp",
+      "type": "image/webp"
     }
   ]
 }
