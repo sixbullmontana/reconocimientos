@@ -2718,6 +2718,60 @@
       "date": "2026-02-12",
       "file": "data/images/mw1kl8v04f1sfw.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1kpkq39njvee",
+      "name": "Ruta de Fudamentos de Marketing Digital",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-02-22",
+      "file": "data/images/mw1kpkq39njvee.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kpmrjt6m0pr",
+      "name": "Ruta de Herramientas Digitales y Automatización para Negocios",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-02-12",
+      "file": "data/images/mw1kpmrjt6m0pr.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kpoxaf8i23a",
+      "name": "Ruta de Inversión en Mercados Financieros",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-02-10",
+      "file": "data/images/mw1kpoxaf8i23a.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kpr2jn7vtwd",
+      "name": "Ruta de Finanzas Personales y Corporativas",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-02-09",
+      "file": "data/images/mw1kpr2jn7vtwd.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kpt82tbp3h3",
+      "name": "Ruta de Ventas, CRM y Experiencia del Cliente",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-02-11",
+      "file": "data/images/mw1kpt82tbp3h3.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kpvjf7x5eeb",
+      "name": "Ruta de Admnistración de Servidores Linux",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1kpvjf7x5eeb.webp",
+      "type": "image/webp"
     }
   ]
 }
