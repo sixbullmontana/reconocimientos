@@ -3825,6 +3825,24 @@
       "date": "2022-05-20",
       "file": "data/images/mw1nxy20adnr9h.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1o2usf4nd8xu",
+      "name": "Introduction to Cloud Infrastructure Technologies",
+      "category": "Certificados",
+      "institution": "Edx",
+      "date": "2024-07-21",
+      "file": "data/images/mw1o2usf4nd8xu.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1o2x8gtkdfvv",
+      "name": "Introduction to Kubernetes",
+      "category": "Certificados",
+      "institution": "Edx",
+      "date": "2024-07-21",
+      "file": "data/images/mw1o2x8gtkdfvv.webp",
+      "type": "image/webp"
     }
   ]
 }
