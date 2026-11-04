@@ -3096,6 +3096,96 @@
       "date": "2025-11-07",
       "file": "data/images/mw1ls9qw6r3gjt.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1lx2vwr17pdn",
+      "name": "Curso de Cine Móvil",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-10",
+      "file": "data/images/mw1lx2vwr17pdn.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lx4y3igh5au",
+      "name": "Curso de Computación Básica",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1lx4y3igh5au.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lx6uqs6ld84",
+      "name": "Curso de Creación Documental",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lx6uqs6ld84.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lx8z8ominuu",
+      "name": "Curso de Edición Periodística",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lx8z8ominuu.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxarcp7j3s1",
+      "name": "Curso de Entrevistas Periodísticas",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lxarcp7j3s1.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxcml2j6fyy",
+      "name": "Curso de Excel para Análisis de Datos",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1lxcml2j6fyy.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxeb4f09jy5",
+      "name": "Curso de Fotoperiodismo",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lxeb4f09jy5.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxg8eng051b",
+      "name": "Curso de Fundamentos de Periodismo",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lxg8eng051b.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxhy3dcx2gs",
+      "name": "Curso de Redacción y Géneros Periodísticos",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lxhy3dcx2gs.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lxjwi2mrhnc",
+      "name": "Curso de Growth Marketing con IA",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1lxjwi2mrhnc.webp",
+      "type": "image/webp"
     }
   ]
 }
