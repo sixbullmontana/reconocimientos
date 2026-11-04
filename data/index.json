@@ -2979,6 +2979,33 @@
       "date": "2025-11-08",
       "file": "data/images/mw1lesb917hgqy.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1liypbzrv2xm",
+      "name": "Ruta de Habilidades Directivas y Crecimiento Profesional",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-08",
+      "file": "data/images/mw1liypbzrv2xm.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lj0rh0zzp8n",
+      "name": "Programa de Formación Hacking Ético",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1lj0rh0zzp8n.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lj2ga5c752m",
+      "name": "Ruta de Inteligencia Artificial Aplicada a Finanzas",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lj2ga5c752m.webp",
+      "type": "image/webp"
     }
   ]
 }
