@@ -3186,6 +3186,42 @@
       "date": "2025-11-07",
       "file": "data/images/mw1lxjwi2mrhnc.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1lztiz8riosp",
+      "name": "Curso de Locución",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lztiz8riosp.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lzvm5bkaj4h",
+      "name": "Curso de Automatizaciones Low-Code con N8N",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-07",
+      "file": "data/images/mw1lzvm5bkaj4h.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lzxai3y6sqq",
+      "name": "Curso de Workflows Profesionales con N8N",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lzxai3y6sqq.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1lzzr4y3xj7b",
+      "name": "Curso de N8N Self-Hosted para Empresas",
+      "category": "Certificados",
+      "institution": "Platzi Cursos",
+      "date": "2025-11-09",
+      "file": "data/images/mw1lzzr4y3xj7b.webp",
+      "type": "image/webp"
     }
   ]
 }
