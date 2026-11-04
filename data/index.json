@@ -2844,6 +2844,24 @@
       "date": "2025-11-08",
       "file": "data/images/mw1kuxh2b0cdtj.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1kwa5mxrmd6f",
+      "name": "Ruta de Diversidad, Equidad e Inclusión",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-07",
+      "file": "data/images/mw1kwa5mxrmd6f.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1kwcpbe18ab8",
+      "name": "Ruta de Desarrollo Backend con Java",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2025-11-10",
+      "file": "data/images/mw1kwcpbe18ab8.webp",
+      "type": "image/webp"
     }
   ]
 }
