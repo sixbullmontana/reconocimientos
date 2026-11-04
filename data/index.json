@@ -3465,6 +3465,33 @@
       "date": "2026-04-28",
       "file": "data/images/mw1mpbggiz8vma.webp",
       "type": "image/webp"
+    },
+    {
+      "id": "mw1mrrx3bhcqe7",
+      "name": "Ruta de Programación Móvil con SWIFT y KOTLIN",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-04-22",
+      "file": "data/images/mw1mrrx3bhcqe7.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mru1j9vpoll",
+      "name": "Guía Básica de Redes Sociales para Empresas",
+      "category": "Certificados",
+      "institution": "Platzi",
+      "date": "2026-04-28",
+      "file": "data/images/mw1mru1j9vpoll.webp",
+      "type": "image/webp"
+    },
+    {
+      "id": "mw1mrvwlu2804s",
+      "name": "Ruta de Fundamentos de Finanzas Personales y Corporativas",
+      "category": "Diplomas",
+      "institution": "Platzi",
+      "date": "2026-01-09",
+      "file": "data/images/mw1mrvwlu2804s.webp",
+      "type": "image/webp"
     }
   ]
 }
